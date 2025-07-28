@@ -1,0 +1,137 @@
+\doxysection{main\+\_\+rtos.\+c File Reference}
+\hypertarget{main__rtos_8c}{}\label{main__rtos_8c}\index{main\_rtos.c@{main\_rtos.c}}
+
+
+Aplicación principal del Sistema de Control de Acceso con Free\+RTOS y Display SSD1306.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include "{}pico/stdlib.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/gpio.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/i2c.\+h"{}}\newline
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+{\ttfamily \#include "{}queue.\+h"{}}\newline
+{\ttfamily \#include "{}Free\+RTOSConfig.\+h"{}}\newline
+{\ttfamily \#include "{}keypad.\+h"{}}\newline
+{\ttfamily \#include "{}leds.\+h"{}}\newline
+{\ttfamily \#include "{}database.\+h"{}}\newline
+{\ttfamily \#include "{}access\+\_\+control.\+h"{}}\newline
+{\ttfamily \#include "{}ssd1306\+\_\+display.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{main__rtos_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Función principal del sistema con Free\+RTOS. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main__rtos_8c_ab7e5c95cf72a3f819bc4462a7fb62ca3}{v\+Application\+Malloc\+Failed\+Hook}} (void)
+\begin{DoxyCompactList}\small\item\em Hook llamado cuando se agota la memoria del heap. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main__rtos_8c_a306672a74bdd13ce210c05fca3385c59}{v\+Application\+Stack\+Overflow\+Hook}} (Task\+Handle\+\_\+t px\+Task, char \texorpdfstring{$\ast$}{*}pc\+Task\+Name)
+\begin{DoxyCompactList}\small\item\em Hook llamado cuando se detecta stack overflow en una tarea. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main__rtos_8c_a97fd430f36f8b065226e2bff9bad1de5}{v\+Application\+Idle\+Hook}} (void)
+\begin{DoxyCompactList}\small\item\em Hook de la tarea idle de Free\+RTOS. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Aplicación principal del Sistema de Control de Acceso con Free\+RTOS y Display SSD1306. 
+
+\begin{DoxyAuthor}{Author}
+Sistema de Control de Acceso 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2025
+\end{DoxyDate}
+Sistema de control de acceso completo que utiliza Free\+RTOS para manejo concurrente de\+:
+\begin{DoxyItemize}
+\item Teclado matricial 4x4
+\item Sistema de LEDs de señalización
+\item Display SSD1306 I2C para interfaz de usuario
+\item Base de datos de usuarios
+\item Control de acceso con máquina de estados
+\end{DoxyItemize}
+
+Hardware requerido\+:
+\begin{DoxyItemize}
+\item Raspberry Pi Pico
+\item Teclado matricial 4x4
+\item 3 LEDs (Verde, Rojo, Amarillo)
+\item Display SSD1306 OLED I2C 128x32
+\item Resistencias limitadoras de corriente para LEDs
+\end{DoxyItemize}
+
+Conexiones\+:
+\begin{DoxyItemize}
+\item Teclado\+: Filas GP6-\/\+GP9, Columnas GP10-\/\+GP13
+\item LEDs\+: Verde GP15, Rojo GP16, Amarillo GP17
+\item Display SSD1306\+: SDA GP4, SCL GP5 
+\end{DoxyItemize}
+
+\label{doc-func-members}
+\Hypertarget{main__rtos_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{main__rtos_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\index{main\_rtos.c@{main\_rtos.c}!main@{main}}
+\index{main@{main}!main\_rtos.c@{main\_rtos.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{main__rtos_8c_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+int main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Función principal del sistema con Free\+RTOS. 
+
+Inicializa todos los módulos del sistema, crea las tareas de Free\+RTOS y inicia el scheduler del sistema operativo.
+
+\begin{DoxyReturn}{Returns}
+int Código de salida (nunca se alcanza en sistemas embebidos) 
+\end{DoxyReturn}
+Inicialización de comunicación serie USB Timeout extendido para establecer conexión
+
+Inicialización de módulos del sistema Orden optimizado para el sistema con Free\+RTOS
+
+Crear tareas de Free\+RTOS
+
+Cada módulo funcional del sistema se ejecuta como una tarea independiente, permitiendo procesamiento concurrente y comunicación através de colas.
+
+Iniciar el scheduler de Free\+RTOS
+
+Una vez que se inicia el scheduler, el control pasa al kernel de Free\+RTOS y las tareas comienzan a ejecutarse según sus prioridades y algoritmos de scheduling configurados.
+
+Esta función nunca retorna en operación normal.
+
+El código siguiente solo se ejecuta si hay un error crítico en el sistema que causa que el scheduler falle\Hypertarget{main__rtos_8c_a97fd430f36f8b065226e2bff9bad1de5}\index{main\_rtos.c@{main\_rtos.c}!vApplicationIdleHook@{vApplicationIdleHook}}
+\index{vApplicationIdleHook@{vApplicationIdleHook}!main\_rtos.c@{main\_rtos.c}}
+\doxysubsubsection{\texorpdfstring{vApplicationIdleHook()}{vApplicationIdleHook()}}
+{\footnotesize\ttfamily \label{main__rtos_8c_a97fd430f36f8b065226e2bff9bad1de5} 
+void v\+Application\+Idle\+Hook (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Hook de la tarea idle de Free\+RTOS. 
+
+Esta función es llamada cada vez que no hay tareas listas para ejecutar. Implementa eficiencia energética inteligente basada en el estado del teclado. \Hypertarget{main__rtos_8c_ab7e5c95cf72a3f819bc4462a7fb62ca3}\index{main\_rtos.c@{main\_rtos.c}!vApplicationMallocFailedHook@{vApplicationMallocFailedHook}}
+\index{vApplicationMallocFailedHook@{vApplicationMallocFailedHook}!main\_rtos.c@{main\_rtos.c}}
+\doxysubsubsection{\texorpdfstring{vApplicationMallocFailedHook()}{vApplicationMallocFailedHook()}}
+{\footnotesize\ttfamily \label{main__rtos_8c_ab7e5c95cf72a3f819bc4462a7fb62ca3} 
+void v\+Application\+Malloc\+Failed\+Hook (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Hook llamado cuando se agota la memoria del heap. 
+
+Esta función es llamada por Free\+RTOS cuando no hay suficiente memoria disponible para crear tareas, colas, o asignar memoria dinámica. \Hypertarget{main__rtos_8c_a306672a74bdd13ce210c05fca3385c59}\index{main\_rtos.c@{main\_rtos.c}!vApplicationStackOverflowHook@{vApplicationStackOverflowHook}}
+\index{vApplicationStackOverflowHook@{vApplicationStackOverflowHook}!main\_rtos.c@{main\_rtos.c}}
+\doxysubsubsection{\texorpdfstring{vApplicationStackOverflowHook()}{vApplicationStackOverflowHook()}}
+{\footnotesize\ttfamily \label{main__rtos_8c_a306672a74bdd13ce210c05fca3385c59} 
+void v\+Application\+Stack\+Overflow\+Hook (\begin{DoxyParamCaption}\item[{Task\+Handle\+\_\+t}]{px\+Task}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{pc\+Task\+Name}{}\end{DoxyParamCaption})}
+
+
+
+Hook llamado cuando se detecta stack overflow en una tarea. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em px\+Task} & Handle de la tarea que causó el overflow \\
+\hline
+{\em pc\+Task\+Name} & Nombre de la tarea que causó el overflow \\
+\hline
+\end{DoxyParams}

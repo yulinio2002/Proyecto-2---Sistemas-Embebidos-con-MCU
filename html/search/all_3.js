@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['cambio_20de_20contraseña_0',['Cambio de Contraseña',['../index.html#password_change',1,'Cambio de Contraseña'],['../md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2.html#autotoc_md24',1,'Cambio de Contraseña']]],
+  ['cancelación_1',['Cancelación',['../md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2.html#autotoc_md25',1,'']]],
+  ['características_20de_20seguridad_2',['Características de Seguridad',['../index.html#security_sec',1,'']]],
+  ['características_20del_20sistema_3',['Características del Sistema',['../md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2.html#autotoc_md2',1,'']]],
+  ['características_20principales_4',['Características Principales',['../index.html#features_sec',1,'']]],
+  ['características_20técnicas_20de_20freertos_5',['Características Técnicas de FreeRTOS',['../md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2.html#autotoc_md26',1,'']]],
+  ['change_5fuser_5fpassword_6',['change_user_password',['../database_8h.html#a2e6b3b46dde1a2ccd6d7d941f6217809',1,'database.c']]],
+  ['column_5fchange_5ftime_7',['column_change_time',['../structkeypad__hybrid__controller__t.html#a6196d786523f9bf9d9847781b07d2b99',1,'keypad_hybrid_controller_t']]],
+  ['comandos_20de_20compilación_8',['Comandos de Compilación',['../md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2.html#autotoc_md20',1,'']]],
+  ['compilación_9',['Comandos de Compilación',['../md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2.html#autotoc_md20',1,'']]],
+  ['compilación_20y_20despliegue_10',['Compilación y Despliegue',['../index.html#compilation_sec',1,'']]],
+  ['compilación_20y_20uso_11',['Compilación y Uso',['../md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2.html#autotoc_md18',1,'']]],
+  ['comunicación_20entre_20tareas_12',['Comunicación Entre Tareas',['../md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2.html#autotoc_md10',1,'']]],
+  ['con_20freertos_20y_20display_20ssd1306_13',['Sistema de Control de Acceso con FreeRTOS y Display SSD1306',['../md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2.html',1,'']]],
+  ['con_20raspberry_20pi_20pico_14',['Sistema de Control de Acceso con Raspberry Pi Pico',['../index.html',1,'']]],
+  ['conexiones_20de_20hardware_15',['Conexiones de Hardware',['../md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2.html#autotoc_md4',1,'']]],
+  ['configuración_20de_20hardware_16',['Configuración de Hardware',['../index.html#hardware_sec',1,'']]],
+  ['configuración_20del_20kernel_17',['Configuración del Kernel',['../md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2.html#autotoc_md27',1,'']]],
+  ['contraseña_18',['Contraseña',['../index.html#password_change',1,'Cambio de Contraseña'],['../md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2.html#autotoc_md24',1,'Cambio de Contraseña']]],
+  ['control_20de_20acceso_20con_20freertos_20y_20display_20ssd1306_19',['Sistema de Control de Acceso con FreeRTOS y Display SSD1306',['../md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2.html',1,'']]],
+  ['control_20de_20acceso_20con_20raspberry_20pi_20pico_20',['Sistema de Control de Acceso con Raspberry Pi Pico',['../index.html',1,'']]],
+  ['current_5fcolumn_21',['current_column',['../structkeypad__hybrid__controller__t.html#adace5ff48a01cfa401ff2f18fda4d221',1,'keypad_hybrid_controller_t']]],
+  ['custom_5fmessage_22',['custom_message',['../structdisplay__command__t.html#a8652d02b624c994ce508f6bc372628e3',1,'display_command_t']]]
+];

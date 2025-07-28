@@ -1,0 +1,79 @@
+\doxysection{keypad\+\_\+hybrid\+\_\+controller\+\_\+t Struct Reference}
+\hypertarget{structkeypad__hybrid__controller__t}{}\label{structkeypad__hybrid__controller__t}\index{keypad\_hybrid\_controller\_t@{keypad\_hybrid\_controller\_t}}
+
+
+Estructura de control híbrido (adaptada del proyecto 1)  
+
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{keypad_8h_ae5567eabc884b77fdd8fbca9424a97ef}{keypad\+\_\+fsm\+\_\+state\+\_\+t}} \mbox{\hyperlink{structkeypad__hybrid__controller__t_a855825383d1192f4ccf06e4678822120}{state}}
+\item 
+Tick\+Type\+\_\+t \mbox{\hyperlink{structkeypad__hybrid__controller__t_a32597147a30dae7970b5ab76321cc3bb}{last\+\_\+change}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structkeypad__hybrid__controller__t_a2bc694fd87ec3a34a8f3d1073a9c9df6}{detected\+\_\+row}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structkeypad__hybrid__controller__t_a09003306980142990755871b31c0e9f3}{detected\+\_\+col}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structkeypad__hybrid__controller__t_adace5ff48a01cfa401ff2f18fda4d221}{current\+\_\+column}}
+\item 
+Tick\+Type\+\_\+t \mbox{\hyperlink{structkeypad__hybrid__controller__t_a6196d786523f9bf9d9847781b07d2b99}{column\+\_\+change\+\_\+time}}
+\item 
+bool \mbox{\hyperlink{structkeypad__hybrid__controller__t_a8c06380f29d4accfe37918b854c9f504}{irq\+\_\+pending}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Estructura de control híbrido (adaptada del proyecto 1) 
+
+\label{doc-variable-members}
+\Hypertarget{structkeypad__hybrid__controller__t_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structkeypad__hybrid__controller__t_a6196d786523f9bf9d9847781b07d2b99}\index{keypad\_hybrid\_controller\_t@{keypad\_hybrid\_controller\_t}!column\_change\_time@{column\_change\_time}}
+\index{column\_change\_time@{column\_change\_time}!keypad\_hybrid\_controller\_t@{keypad\_hybrid\_controller\_t}}
+\doxysubsubsection{\texorpdfstring{column\_change\_time}{column\_change\_time}}
+{\footnotesize\ttfamily \label{structkeypad__hybrid__controller__t_a6196d786523f9bf9d9847781b07d2b99} 
+Tick\+Type\+\_\+t keypad\+\_\+hybrid\+\_\+controller\+\_\+t\+::column\+\_\+change\+\_\+time}
+
+Tiempo del cambio de columna \Hypertarget{structkeypad__hybrid__controller__t_adace5ff48a01cfa401ff2f18fda4d221}\index{keypad\_hybrid\_controller\_t@{keypad\_hybrid\_controller\_t}!current\_column@{current\_column}}
+\index{current\_column@{current\_column}!keypad\_hybrid\_controller\_t@{keypad\_hybrid\_controller\_t}}
+\doxysubsubsection{\texorpdfstring{current\_column}{current\_column}}
+{\footnotesize\ttfamily \label{structkeypad__hybrid__controller__t_adace5ff48a01cfa401ff2f18fda4d221} 
+uint8\+\_\+t keypad\+\_\+hybrid\+\_\+controller\+\_\+t\+::current\+\_\+column}
+
+Columna actual siendo escaneada \Hypertarget{structkeypad__hybrid__controller__t_a09003306980142990755871b31c0e9f3}\index{keypad\_hybrid\_controller\_t@{keypad\_hybrid\_controller\_t}!detected\_col@{detected\_col}}
+\index{detected\_col@{detected\_col}!keypad\_hybrid\_controller\_t@{keypad\_hybrid\_controller\_t}}
+\doxysubsubsection{\texorpdfstring{detected\_col}{detected\_col}}
+{\footnotesize\ttfamily \label{structkeypad__hybrid__controller__t_a09003306980142990755871b31c0e9f3} 
+uint8\+\_\+t keypad\+\_\+hybrid\+\_\+controller\+\_\+t\+::detected\+\_\+col}
+
+Columna encontrada por polling \Hypertarget{structkeypad__hybrid__controller__t_a2bc694fd87ec3a34a8f3d1073a9c9df6}\index{keypad\_hybrid\_controller\_t@{keypad\_hybrid\_controller\_t}!detected\_row@{detected\_row}}
+\index{detected\_row@{detected\_row}!keypad\_hybrid\_controller\_t@{keypad\_hybrid\_controller\_t}}
+\doxysubsubsection{\texorpdfstring{detected\_row}{detected\_row}}
+{\footnotesize\ttfamily \label{structkeypad__hybrid__controller__t_a2bc694fd87ec3a34a8f3d1073a9c9df6} 
+uint8\+\_\+t keypad\+\_\+hybrid\+\_\+controller\+\_\+t\+::detected\+\_\+row}
+
+Fila detectada por IRQ \Hypertarget{structkeypad__hybrid__controller__t_a8c06380f29d4accfe37918b854c9f504}\index{keypad\_hybrid\_controller\_t@{keypad\_hybrid\_controller\_t}!irq\_pending@{irq\_pending}}
+\index{irq\_pending@{irq\_pending}!keypad\_hybrid\_controller\_t@{keypad\_hybrid\_controller\_t}}
+\doxysubsubsection{\texorpdfstring{irq\_pending}{irq\_pending}}
+{\footnotesize\ttfamily \label{structkeypad__hybrid__controller__t_a8c06380f29d4accfe37918b854c9f504} 
+bool keypad\+\_\+hybrid\+\_\+controller\+\_\+t\+::irq\+\_\+pending}
+
+Bandera de IRQ pendiente \Hypertarget{structkeypad__hybrid__controller__t_a32597147a30dae7970b5ab76321cc3bb}\index{keypad\_hybrid\_controller\_t@{keypad\_hybrid\_controller\_t}!last\_change@{last\_change}}
+\index{last\_change@{last\_change}!keypad\_hybrid\_controller\_t@{keypad\_hybrid\_controller\_t}}
+\doxysubsubsection{\texorpdfstring{last\_change}{last\_change}}
+{\footnotesize\ttfamily \label{structkeypad__hybrid__controller__t_a32597147a30dae7970b5ab76321cc3bb} 
+Tick\+Type\+\_\+t keypad\+\_\+hybrid\+\_\+controller\+\_\+t\+::last\+\_\+change}
+
+Timestamp del último cambio \Hypertarget{structkeypad__hybrid__controller__t_a855825383d1192f4ccf06e4678822120}\index{keypad\_hybrid\_controller\_t@{keypad\_hybrid\_controller\_t}!state@{state}}
+\index{state@{state}!keypad\_hybrid\_controller\_t@{keypad\_hybrid\_controller\_t}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily \label{structkeypad__hybrid__controller__t_a855825383d1192f4ccf06e4678822120} 
+\mbox{\hyperlink{keypad_8h_ae5567eabc884b77fdd8fbca9424a97ef}{keypad\+\_\+fsm\+\_\+state\+\_\+t}} keypad\+\_\+hybrid\+\_\+controller\+\_\+t\+::state}
+
+Estado actual de la FSM 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{keypad_8c}{keypad.\+c}}\end{DoxyCompactItemize}

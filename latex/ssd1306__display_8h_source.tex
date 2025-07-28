@@ -1,0 +1,42 @@
+\doxysection{ssd1306\+\_\+display.\+h}
+\hypertarget{ssd1306__display_8h_source}{}\label{ssd1306__display_8h_source}\mbox{\hyperlink{ssd1306__display_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ SSD1306\_DISPLAY\_H}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ SSD1306\_DISPLAY\_H}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57a1dc18697328c85b0e8252d784cb1f8ed}{DISPLAY\_MSG\_STANDBY}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57aeb10137b5eef934b2fb580f94955e49e}{DISPLAY\_MSG\_ENTER\_ID}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57ac2790e4ff94b38f95981c28223fc4c6d}{DISPLAY\_MSG\_ENTER\_PASSWORD}},\ }
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57a92b185678369df0d8dc81e223d850c18}{DISPLAY\_MSG\_WELCOME}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57ab6ad450823969092fb5c15fd43ac290a}{DISPLAY\_MSG\_INVALID}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57a59acce404ea4ff2549ec02181eedb228}{DISPLAY\_MSG\_CHANGE\_USER}},\ \ \ \ }
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57a80bc66df2858a81a6e5d78a7233a8a0c}{DISPLAY\_MSG\_CUSTOM}}\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00029\ \}\ \mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57}{display\_message\_type\_t}};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57}{display\_message\_type\_t}}\ type;}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structdisplay__command__t_a8652d02b624c994ce508f6bc372628e3}{custom\_message}}[32];\ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structdisplay__command__t_abf6557c41c0d7419fbc2c4b28b5b85a0}{display\_time\_ms}};\ \ \ }
+\DoxyCodeLine{00038\ \}\ \mbox{\hyperlink{structdisplay__command__t}{display\_command\_t}};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00049\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{ssd1306__display_8h_a289a5851baca6824f398a28c8741787e}{ssd1306\_init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00057\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{ssd1306__display_8h_aa8cc1916179e6a7cc7e069ee1d49d411}{ssd1306\_show\_message}}(\mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57}{display\_message\_type\_t}}\ type,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ custom\_message);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00065\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{ssd1306__display_8h_a77642cd34f52b24f424c868f230ed117}{ssd1306\_update\_datetime}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00070\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{ssd1306__display_8h_a561cceb2a69fad0aa293bee40f056403}{ssd1306\_clear}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00080\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{ssd1306__display_8h_ae6a8a683054f1b4b4dda8be2e23d87f2}{display\_task}}(\textcolor{keywordtype}{void}\ *pvParameters);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00091\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{ssd1306__display_8h_a2e74383909669c24cf6349c51d503314}{ssd1306\_send\_command}}(\mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57}{display\_message\_type\_t}}\ type,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ custom\_message,\ uint32\_t\ display\_time\_ms);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ SSD1306\_DISPLAY\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

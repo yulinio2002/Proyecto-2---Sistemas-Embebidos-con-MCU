@@ -1,0 +1,192 @@
+\chapter{Sistema de Control de Acceso con Raspberry Pi Pico }
+\hypertarget{index}{}\label{index}\index{Sistema de Control de Acceso con Raspberry Pi Pico@{Sistema de Control de Acceso con Raspberry Pi Pico}}
+
+\begin{DoxyItemize}
+\item 
+\item 
+\end{DoxyItemize}\hypertarget{index_intro_sec}{}\doxysection{\texorpdfstring{Introducción}{Introducción}}\label{index_intro_sec}
+
+\begin{DoxyItemize}
+\item 
+\item Sistema de control de acceso implementado en C para Raspberry Pi Pico que utiliza
+\item un teclado matricial 4x4 para la autenticación de usuarios. El sistema incluye
+\item una base de datos de usuarios, manejo de timeouts, señalización LED, y capacidades
+\item de cambio de contraseñas.
+\item 
+\item 
+\end{DoxyItemize}\hypertarget{index_features_sec}{}\doxysection{\texorpdfstring{Características Principales}{Características Principales}}\label{index_features_sec}
+
+\begin{DoxyItemize}
+\item 
+\item -\/ {\bfseries{Autenticación de usuarios}}\+: ID de 6 dígitos + contraseña de 4 dígitos
+\item -\/ {\bfseries{Base de datos}}\+: Hasta 10 usuarios con bloqueo por intentos fallidos
+\item -\/ {\bfseries{Timeout de seguridad}}\+: 10 segundos para completar la autenticación
+\item -\/ {\bfseries{Señalización LED}}\+: Estados visuales del sistema
+\item -\/ {\bfseries{Cambio de contraseñas}}\+: Mecanismo seguro para actualizar credenciales
+\item -\/ {\bfseries{Antirebote por software}}\+: 300ms entre pulsaciones de teclas
+\item -\/ {\bfseries{Arquitectura modular}}\+: Separación clara de responsabilidades
+\item 
+\item 
+\end{DoxyItemize}\hypertarget{index_hardware_sec}{}\doxysection{\texorpdfstring{Configuración de Hardware}{Configuración de Hardware}}\label{index_hardware_sec}
+
+\begin{DoxyItemize}
+\item 
+\item 
+\end{DoxyItemize}\hypertarget{index_keypad_hw}{}\doxysubsection{\texorpdfstring{Teclado Matricial 4x4}{Teclado Matricial 4x4}}\label{index_keypad_hw}
+
+\begin{DoxyItemize}
+\item -\/ {\bfseries{Filas (Salidas)}}\+: GP6, GP7, GP8, GP9
+\item -\/ {\bfseries{Columnas (Entradas)}}\+: GP10, GP11, GP12, GP13
+\item -\/ {\bfseries{Configuración}}\+: Pull-\/down interno en columnas
+\item 
+\item 
+\end{DoxyItemize}\hypertarget{index_leds_hw}{}\doxysubsection{\texorpdfstring{Sistema de LEDs}{Sistema de LEDs}}\label{index_leds_hw}
+
+\begin{DoxyItemize}
+\item -\/ {\bfseries{LED Verde (GP15)}}\+: Acceso concedido (5 segundos)
+\item -\/ {\bfseries{LED Rojo (GP16)}}\+: Acceso denegado (2 segundos) ~\newline
+
+\item -\/ {\bfseries{LED Amarillo (GP17)}}\+: Estados del sistema
+\item -\/ Encendido permanente\+: Sistema listo
+\item -\/ Apagado\+: Ingresando ID
+\item -\/ Parpadeando 0.\+5\+Hz\+: Ingresando contraseña
+\item 
+\item 
+\end{DoxyItemize}\hypertarget{index_software_sec}{}\doxysection{\texorpdfstring{Arquitectura de Software}{Arquitectura de Software}}\label{index_software_sec}
+
+\begin{DoxyItemize}
+\item 
+\item 
+\end{DoxyItemize}\hypertarget{index_modules_sec}{}\doxysubsection{\texorpdfstring{Módulos del Sistema}{Módulos del Sistema}}\label{index_modules_sec}
+
+\begin{DoxyItemize}
+\item 
+\item -\/ \doxylink{keypad_8h}{Keypad Module}\+: Controlador del teclado matricial
+\item -\/ \doxylink{leds_8h}{LEDs Module}\+: Sistema de señalización luminosa
+\item -\/ \doxylink{database_8h}{Database Module}\+: Gestión de usuarios y autenticación
+\item -\/ \doxylink{access__control_8h}{Access Control Module}\+: Lógica principal del sistema
+\item 
+\item 
+\end{DoxyItemize}\hypertarget{index_states_sec}{}\doxysubsection{\texorpdfstring{Estados del Sistema}{Estados del Sistema}}\label{index_states_sec}
+
+\begin{DoxyItemize}
+\item 
+\item El sistema opera como una máquina de estados finitos\+:
+\item 
+\item 1. {\bfseries{STATE\+\_\+\+IDLE}}\+: Esperando entrada del usuario
+\item 2. {\bfseries{STATE\+\_\+\+ENTERING\+\_\+\+ID}}\+: Capturando ID de 6 dígitos
+\item 3. {\bfseries{STATE\+\_\+\+ENTERING\+\_\+\+PASSWORD}}\+: Capturando contraseña de 4 dígitos
+\item 4. {\bfseries{STATE\+\_\+\+PROCESSING}}\+: Procesando autenticación
+\item 5. {\bfseries{STATE\+\_\+\+ACCESS\+\_\+\+GRANTED}}\+: Mostrando acceso concedido
+\item 6. {\bfseries{STATE\+\_\+\+ACCESS\+\_\+\+DENIED}}\+: Mostrando acceso denegado
+\item 7. {\bfseries{STATE\+\_\+\+TIMEOUT}}\+: Timeout del proceso
+\item 8. {\bfseries{STATE\+\_\+\+CHANGE\+\_\+\+PASSWORD}}\+: Modo cambio de contraseña
+\item 
+\item 
+\end{DoxyItemize}\hypertarget{index_usage_sec}{}\doxysection{\texorpdfstring{Modo de Uso}{Modo de Uso}}\label{index_usage_sec}
+
+\begin{DoxyItemize}
+\item 
+\item 
+\end{DoxyItemize}\hypertarget{index_normal_auth}{}\doxysubsection{\texorpdfstring{Autenticación Normal}{Autenticación Normal}}\label{index_normal_auth}
+
+\begin{DoxyItemize}
+\item 1. Sistema muestra LED amarillo (listo)
+\item 2. Usuario ingresa 6 dígitos de ID
+\item 3. LED amarillo se apaga
+\item 4. Usuario ingresa 4 dígitos de contraseña
+\item 5. LED amarillo parpadea durante ingreso
+\item 6. Sistema procesa y muestra resultado\+:
+\item -\/ Verde 5s\+: Acceso concedido
+\item -\/ Rojo 2s\+: Acceso denegado
+\item 
+\item 
+\end{DoxyItemize}\hypertarget{index_password_change}{}\doxysubsection{\texorpdfstring{Cambio de Contraseña}{Cambio de Contraseña}}\label{index_password_change}
+
+\begin{DoxyItemize}
+\item 1. Presionar \textquotesingle{}\texorpdfstring{$\ast$}{*}\textquotesingle{} cuando sistema está listo
+\item 2. Ingresar ID de usuario (6 dígitos)
+\item 3. Ingresar contraseña actual (4 dígitos)
+\item 4. Ingresar nueva contraseña (4 dígitos)
+\item 5. Sistema confirma el cambio
+\item 
+\item 
+\end{DoxyItemize}\hypertarget{index_security_sec}{}\doxysection{\texorpdfstring{Características de Seguridad}{Características de Seguridad}}\label{index_security_sec}
+
+\begin{DoxyItemize}
+\item 
+\item -\/ {\bfseries{Bloqueo automático}}\+: 3 intentos fallidos bloquean permanentemente al usuario
+\item -\/ {\bfseries{Timeout de sesión}}\+: 10 segundos máximo para completar autenticación
+\item -\/ {\bfseries{Ocultación de contraseña}}\+: Se muestran asteriscos en lugar de dígitos
+\item -\/ {\bfseries{Sin posibilidad de borrar}}\+: Según especificaciones, no se pueden corregir errores
+\item -\/ {\bfseries{Antirebote}}\+: Previene pulsaciones accidentales múltiples
+\item 
+\item 
+\end{DoxyItemize}\hypertarget{index_technical_sec}{}\doxysection{\texorpdfstring{Detalles Técnicos}{Detalles Técnicos}}\label{index_technical_sec}
+
+\begin{DoxyItemize}
+\item 
+\item 
+\end{DoxyItemize}\hypertarget{index_libs_sec}{}\doxysubsection{\texorpdfstring{Librerías Utilizadas}{Librerías Utilizadas}}\label{index_libs_sec}
+
+\begin{DoxyItemize}
+\item -\/ {\ttfamily hardware/gpio.\+h}\+: Control de pines GPIO
+\item -\/ {\ttfamily hardware/timer.\+h}\+: Manejo de timeouts y temporización
+\item -\/ {\ttfamily pico/stdlib.\+h}\+: Funciones estándar del SDK
+\item 
+\item 
+\end{DoxyItemize}\hypertarget{index_timing_sec}{}\doxysubsection{\texorpdfstring{Temporización}{Temporización}}\label{index_timing_sec}
+
+\begin{DoxyItemize}
+\item -\/ {\bfseries{Estabilización GPIO}}\+: 50µs para estabilizar señales
+\item -\/ {\bfseries{Antirebote}}\+: 300ms entre pulsaciones
+\item -\/ {\bfseries{Timeout autenticación}}\+: 10 segundos
+\item -\/ {\bfseries{Parpadeo LED}}\+: 0.\+5\+Hz (1s encendido, 1s apagado)
+\item -\/ {\bfseries{Bucle principal}}\+: 10ms de pausa para optimización CPU
+\item 
+\item 
+\end{DoxyItemize}\hypertarget{index_compilation_sec}{}\doxysection{\texorpdfstring{Compilación y Despliegue}{Compilación y Despliegue}}\label{index_compilation_sec}
+
+\begin{DoxyItemize}
+\item 
+\item El proyecto utiliza CMake con el SDK de Raspberry Pi Pico\+:
+\item 
+\item {\ttfamily }
+\item {\ttfamily mkdir build \&\& cd build}
+\item {\ttfamily cmake ..}
+\item {\ttfamily make}
+\item {\ttfamily }
+\item 
+\item O usando las tareas de VS Code\+:
+\item -\/ "{}\+Compile Project"{} para construir
+\item -\/ "{}\+Run Project"{} para cargar al Pico
+\item 
+\item 
+\end{DoxyItemize}\hypertarget{index_testing_sec}{}\doxysection{\texorpdfstring{Usuarios de Prueba}{Usuarios de Prueba}}\label{index_testing_sec}
+
+\begin{DoxyItemize}
+\item 
+\item El sistema incluye 5 usuarios predefinidos para pruebas\+:
+\item 
+\item \texorpdfstring{$\vert$}{|} ID \texorpdfstring{$\vert$}{|} Contraseña \texorpdfstring{$\vert$}{|}
+\item \texorpdfstring{$\vert$}{|}-\/-\/-\/-\/-\/---\texorpdfstring{$\vert$}{|}-\/-\/-\/-\/-\/-\/-\/-\/-\/---\texorpdfstring{$\vert$}{|}
+\item \texorpdfstring{$\vert$}{|} 123456 \texorpdfstring{$\vert$}{|} 1234 \texorpdfstring{$\vert$}{|}
+\item \texorpdfstring{$\vert$}{|} 789012 \texorpdfstring{$\vert$}{|} 5678 \texorpdfstring{$\vert$}{|}
+\item \texorpdfstring{$\vert$}{|} 345678 \texorpdfstring{$\vert$}{|} 9012 \texorpdfstring{$\vert$}{|}
+\item \texorpdfstring{$\vert$}{|} 901234 \texorpdfstring{$\vert$}{|} 3456 \texorpdfstring{$\vert$}{|}
+\item \texorpdfstring{$\vert$}{|} 567890 \texorpdfstring{$\vert$}{|} 7890 \texorpdfstring{$\vert$}{|}
+\item 
+\item 
+\end{DoxyItemize}\hypertarget{index_authors_sec}{}\doxysection{\texorpdfstring{Autores}{Autores}}\label{index_authors_sec}
+
+\begin{DoxyItemize}
+\item 
+\item Desarrollado para la práctica de Sistemas Embebidos
+\item 
+\item 
+\end{DoxyItemize}\hypertarget{index_license_sec}{}\doxysection{\texorpdfstring{Licencia}{Licencia}}\label{index_license_sec}
+
+\begin{DoxyItemize}
+\item 
+\item Proyecto educativo -\/ Sistemas Embebidos 2025 \texorpdfstring{$\ast$}{*}/ 
+\end{DoxyItemize}

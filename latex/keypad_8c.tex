@@ -1,0 +1,146 @@
+\doxysection{keypad.\+c File Reference}
+\hypertarget{keypad_8c}{}\label{keypad_8c}\index{keypad.c@{keypad.c}}
+
+
+Implementación híbrida del teclado matricial adaptada del Proyecto 1 a Free\+RTOS.  
+
+
+{\ttfamily \#include "{}keypad.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/gpio.\+h"{}}\newline
+{\ttfamily \#include "{}hardware/irq.\+h"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+{\ttfamily \#include "{}queue.\+h"{}}\newline
+{\ttfamily \#include "{}semphr.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structkeypad__hybrid__controller__t}{keypad\+\_\+hybrid\+\_\+controller\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Estructura de control híbrido (adaptada del proyecto 1) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{keypad_8c_a3cfd3aa62338d12609f6d65bce97e9cd}\label{keypad_8c_a3cfd3aa62338d12609f6d65bce97e9cd} 
+\#define {\bfseries ROWS}~4
+\item 
+\Hypertarget{keypad_8c_ab59ad2ee1a48b83c2eef1f019ed8cc48}\label{keypad_8c_ab59ad2ee1a48b83c2eef1f019ed8cc48} 
+\#define {\bfseries COLS}~4
+\item 
+\Hypertarget{keypad_8c_a2e699cd3601e5b0fec029441306d46aa}\label{keypad_8c_a2e699cd3601e5b0fec029441306d46aa} 
+\#define {\bfseries DEBOUNCE\+\_\+\+TIME\+\_\+\+MS}~30
+\item 
+\Hypertarget{keypad_8c_a80d6f5e8e0077a929bcdb24bb3d22056}\label{keypad_8c_a80d6f5e8e0077a929bcdb24bb3d22056} 
+\#define {\bfseries RELEASE\+\_\+\+TIME\+\_\+\+MS}~20
+\item 
+\Hypertarget{keypad_8c_a59cd3c5cbd31684c3e0856bc8bd67ceb}\label{keypad_8c_a59cd3c5cbd31684c3e0856bc8bd67ceb} 
+\#define {\bfseries COLUMN\+\_\+\+STABILIZATION\+\_\+\+MS}~1
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{keypad_8c_aaea5e45936380a42121fc758473fe130}{keypad\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Inicializa el sistema híbrido del teclado (adaptado del proyecto 1) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{keypad_8c_a556232420635facc65ce14d5da028beb}{keypad\+\_\+task}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\begin{DoxyCompactList}\small\item\em Tarea de Free\+RTOS para manejar el teclado híbrido. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{keypad_8c_ae2752884ad1a52d2e01b688991ece986}{keypad\+\_\+get\+\_\+event}} (\mbox{\hyperlink{structkeypad__event__t}{keypad\+\_\+event\+\_\+t}} \texorpdfstring{$\ast$}{*}event, uint32\+\_\+t timeout\+\_\+ms)
+\begin{DoxyCompactList}\small\item\em Obtiene un evento del teclado. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{keypad_8c_a232df48ba4e4999316d70581ff6791ee}{keypad\+\_\+is\+\_\+idle}} (void)
+\begin{DoxyCompactList}\small\item\em Verifica si el sistema está en estado IDLE (para WFI) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementación híbrida del teclado matricial adaptada del Proyecto 1 a Free\+RTOS. 
+
+\begin{DoxyAuthor}{Author}
+Sistema de Control de Acceso 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2025
+\end{DoxyDate}
+SISTEMA HÍ\+BRIDO ADAPTADO DEL PROYECTO 1\+:
+
+INTERRUPCIONES (Parte Reactiva)\+:
+\begin{DoxyItemize}
+\item Detectan automáticamente cuando se presiona una tecla
+\item Identifican QUÉ FILA se activó (GP6, GP7, GP8, GP9)
+\item Activan el estado DEBOUNCE para iniciar el polling
+\item Despiertan la tarea Free\+RTOS via semáforo
+\end{DoxyItemize}
+
+POLLING (Parte Activa -\/ Dentro de Free\+RTOS)\+:
+\begin{DoxyItemize}
+\item Se ejecuta solo DESPUÉS de una interrupción
+\item Escanea las columnas secuencialmente usando Tick\+Type\+\_\+t
+\item Combina fila (de IRQ) + columna (de polling) = tecla exacta
+\item Usa v\+Task\+Delay() en lugar de absolute\+\_\+time
+\end{DoxyItemize}
+
+FLUJO HÍ\+BRIDO CON FREERTOS\+:
+\begin{DoxyEnumerate}
+\item KEYPAD\+\_\+\+IDLE\+: Tarea esperando en semáforo
+\item IRQ detecta fila → KEYPAD\+\_\+\+DEBOUNCE → x\+Semaphore\+Give\+From\+ISR()
+\item Tarea despierta → KEYPAD\+\_\+\+COLUMN\+\_\+\+SCAN\+: Polling → KEYPAD\+\_\+\+PRESSED
+\item KEYPAD\+\_\+\+PRESSED → KEYPAD\+\_\+\+RELEASED → KEYPAD\+\_\+\+IDLE 
+\end{DoxyEnumerate}
+
+\label{doc-func-members}
+\Hypertarget{keypad_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{keypad_8c_ae2752884ad1a52d2e01b688991ece986}\index{keypad.c@{keypad.c}!keypad\_get\_event@{keypad\_get\_event}}
+\index{keypad\_get\_event@{keypad\_get\_event}!keypad.c@{keypad.c}}
+\doxysubsubsection{\texorpdfstring{keypad\_get\_event()}{keypad\_get\_event()}}
+{\footnotesize\ttfamily \label{keypad_8c_ae2752884ad1a52d2e01b688991ece986} 
+bool keypad\+\_\+get\+\_\+event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structkeypad__event__t}{keypad\+\_\+event\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{event}{, }\item[{uint32\+\_\+t}]{timeout\+\_\+ms}{}\end{DoxyParamCaption})}
+
+
+
+Obtiene un evento del teclado. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & Puntero donde almacenar el evento \\
+\hline
+{\em timeout\+\_\+ms} & Tiempo máximo de espera en ms \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true Si se recibió un evento 
+
+false Si hubo timeout 
+\end{DoxyReturn}
+\Hypertarget{keypad_8c_aaea5e45936380a42121fc758473fe130}\index{keypad.c@{keypad.c}!keypad\_init@{keypad\_init}}
+\index{keypad\_init@{keypad\_init}!keypad.c@{keypad.c}}
+\doxysubsubsection{\texorpdfstring{keypad\_init()}{keypad\_init()}}
+{\footnotesize\ttfamily \label{keypad_8c_aaea5e45936380a42121fc758473fe130} 
+bool keypad\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inicializa el sistema híbrido del teclado (adaptado del proyecto 1) 
+
+Inicializa el sistema híbrido del teclado matricial. \Hypertarget{keypad_8c_a232df48ba4e4999316d70581ff6791ee}\index{keypad.c@{keypad.c}!keypad\_is\_idle@{keypad\_is\_idle}}
+\index{keypad\_is\_idle@{keypad\_is\_idle}!keypad.c@{keypad.c}}
+\doxysubsubsection{\texorpdfstring{keypad\_is\_idle()}{keypad\_is\_idle()}}
+{\footnotesize\ttfamily \label{keypad_8c_a232df48ba4e4999316d70581ff6791ee} 
+bool keypad\+\_\+is\+\_\+idle (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Verifica si el sistema está en estado IDLE (para WFI) 
+
+Verifica si el teclado está inactivo (para WFI) \Hypertarget{keypad_8c_a556232420635facc65ce14d5da028beb}\index{keypad.c@{keypad.c}!keypad\_task@{keypad\_task}}
+\index{keypad\_task@{keypad\_task}!keypad.c@{keypad.c}}
+\doxysubsubsection{\texorpdfstring{keypad\_task()}{keypad\_task()}}
+{\footnotesize\ttfamily \label{keypad_8c_a556232420635facc65ce14d5da028beb} 
+void keypad\+\_\+task (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+
+
+Tarea de Free\+RTOS para manejar el teclado híbrido. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pv\+Parameters} & Parámetros de la tarea (no utilizados) \\
+\hline
+\end{DoxyParams}

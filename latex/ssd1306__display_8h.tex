@@ -1,0 +1,191 @@
+\doxysection{ssd1306\+\_\+display.\+h File Reference}
+\hypertarget{ssd1306__display_8h}{}\label{ssd1306__display_8h}\index{ssd1306\_display.h@{ssd1306\_display.h}}
+
+
+Driver para display SSD1306 I2C para el sistema de control de acceso.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structdisplay__command__t}{display\+\_\+command\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Estructura para comandos del display. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57}{display\+\_\+message\+\_\+type\+\_\+t}} \{ \newline
+\mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57a1dc18697328c85b0e8252d784cb1f8ed}{DISPLAY\+\_\+\+MSG\+\_\+\+STANDBY}}
+, \mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57aeb10137b5eef934b2fb580f94955e49e}{DISPLAY\+\_\+\+MSG\+\_\+\+ENTER\+\_\+\+ID}}
+, \mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57ac2790e4ff94b38f95981c28223fc4c6d}{DISPLAY\+\_\+\+MSG\+\_\+\+ENTER\+\_\+\+PASSWORD}}
+, \mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57a92b185678369df0d8dc81e223d850c18}{DISPLAY\+\_\+\+MSG\+\_\+\+WELCOME}}
+, \newline
+\mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57ab6ad450823969092fb5c15fd43ac290a}{DISPLAY\+\_\+\+MSG\+\_\+\+INVALID}}
+, \mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57a59acce404ea4ff2549ec02181eedb228}{DISPLAY\+\_\+\+MSG\+\_\+\+CHANGE\+\_\+\+USER}}
+, \mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57a80bc66df2858a81a6e5d78a7233a8a0c}{DISPLAY\+\_\+\+MSG\+\_\+\+CUSTOM}}
+ \}
+\begin{DoxyCompactList}\small\item\em Tipo de mensaje para mostrar en el display. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{ssd1306__display_8h_a289a5851baca6824f398a28c8741787e}{ssd1306\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Inicializa el display SSD1306 I2C. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ssd1306__display_8h_aa8cc1916179e6a7cc7e069ee1d49d411}{ssd1306\+\_\+show\+\_\+message}} (\mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57}{display\+\_\+message\+\_\+type\+\_\+t}} type, const char \texorpdfstring{$\ast$}{*}custom\+\_\+message)
+\begin{DoxyCompactList}\small\item\em Muestra un mensaje en el display. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ssd1306__display_8h_a77642cd34f52b24f424c868f230ed117}{ssd1306\+\_\+update\+\_\+datetime}} (void)
+\begin{DoxyCompactList}\small\item\em Actualiza la fecha y hora en el display. \end{DoxyCompactList}\item 
+\Hypertarget{ssd1306__display_8h_a561cceb2a69fad0aa293bee40f056403}\label{ssd1306__display_8h_a561cceb2a69fad0aa293bee40f056403} 
+void {\bfseries ssd1306\+\_\+clear} (void)
+\begin{DoxyCompactList}\small\item\em Limpia completamente el display. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ssd1306__display_8h_ae6a8a683054f1b4b4dda8be2e23d87f2}{display\+\_\+task}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\begin{DoxyCompactList}\small\item\em Tarea de Free\+RTOS para manejar el display. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{ssd1306__display_8h_a2e74383909669c24cf6349c51d503314}{ssd1306\+\_\+send\+\_\+command}} (\mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57}{display\+\_\+message\+\_\+type\+\_\+t}} type, const char \texorpdfstring{$\ast$}{*}custom\+\_\+message, uint32\+\_\+t display\+\_\+time\+\_\+ms)
+\begin{DoxyCompactList}\small\item\em Envía un comando al display desde otras tareas. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Driver para display SSD1306 I2C para el sistema de control de acceso. 
+
+\begin{DoxyAuthor}{Author}
+Sistema de Control de Acceso 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2025
+\end{DoxyDate}
+Driver simplificado del display SSD1306 OLED I2C para mostrar información del sistema de control de acceso incluyendo fecha/hora, mensajes de entrada y estado del sistema. 
+
+\label{doc-enum-members}
+\Hypertarget{ssd1306__display_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57}\index{ssd1306\_display.h@{ssd1306\_display.h}!display\_message\_type\_t@{display\_message\_type\_t}}
+\index{display\_message\_type\_t@{display\_message\_type\_t}!ssd1306\_display.h@{ssd1306\_display.h}}
+\doxysubsubsection{\texorpdfstring{display\_message\_type\_t}{display\_message\_type\_t}}
+{\footnotesize\ttfamily \label{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57} 
+enum \mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57}{display\+\_\+message\+\_\+type\+\_\+t}}}
+
+
+
+Tipo de mensaje para mostrar en el display. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DISPLAY\_MSG\_STANDBY@{DISPLAY\_MSG\_STANDBY}!ssd1306\_display.h@{ssd1306\_display.h}}\index{ssd1306\_display.h@{ssd1306\_display.h}!DISPLAY\_MSG\_STANDBY@{DISPLAY\_MSG\_STANDBY}}}\Hypertarget{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57a1dc18697328c85b0e8252d784cb1f8ed}\label{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57a1dc18697328c85b0e8252d784cb1f8ed} 
+DISPLAY\+\_\+\+MSG\+\_\+\+STANDBY&Mostrar fecha y hora en espera \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DISPLAY\_MSG\_ENTER\_ID@{DISPLAY\_MSG\_ENTER\_ID}!ssd1306\_display.h@{ssd1306\_display.h}}\index{ssd1306\_display.h@{ssd1306\_display.h}!DISPLAY\_MSG\_ENTER\_ID@{DISPLAY\_MSG\_ENTER\_ID}}}\Hypertarget{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57aeb10137b5eef934b2fb580f94955e49e}\label{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57aeb10137b5eef934b2fb580f94955e49e} 
+DISPLAY\+\_\+\+MSG\+\_\+\+ENTER\+\_\+\+ID&"{}\+Ingrese su ID"{} \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DISPLAY\_MSG\_ENTER\_PASSWORD@{DISPLAY\_MSG\_ENTER\_PASSWORD}!ssd1306\_display.h@{ssd1306\_display.h}}\index{ssd1306\_display.h@{ssd1306\_display.h}!DISPLAY\_MSG\_ENTER\_PASSWORD@{DISPLAY\_MSG\_ENTER\_PASSWORD}}}\Hypertarget{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57ac2790e4ff94b38f95981c28223fc4c6d}\label{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57ac2790e4ff94b38f95981c28223fc4c6d} 
+DISPLAY\+\_\+\+MSG\+\_\+\+ENTER\+\_\+\+PASSWORD&"{}\+Ingrese su contraseña"{} \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DISPLAY\_MSG\_WELCOME@{DISPLAY\_MSG\_WELCOME}!ssd1306\_display.h@{ssd1306\_display.h}}\index{ssd1306\_display.h@{ssd1306\_display.h}!DISPLAY\_MSG\_WELCOME@{DISPLAY\_MSG\_WELCOME}}}\Hypertarget{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57a92b185678369df0d8dc81e223d850c18}\label{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57a92b185678369df0d8dc81e223d850c18} 
+DISPLAY\+\_\+\+MSG\+\_\+\+WELCOME&"{}\+Bienvenido"{} \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DISPLAY\_MSG\_INVALID@{DISPLAY\_MSG\_INVALID}!ssd1306\_display.h@{ssd1306\_display.h}}\index{ssd1306\_display.h@{ssd1306\_display.h}!DISPLAY\_MSG\_INVALID@{DISPLAY\_MSG\_INVALID}}}\Hypertarget{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57ab6ad450823969092fb5c15fd43ac290a}\label{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57ab6ad450823969092fb5c15fd43ac290a} 
+DISPLAY\+\_\+\+MSG\+\_\+\+INVALID&"{}\+Usuario o Contraseña inválidos"{} \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DISPLAY\_MSG\_CHANGE\_USER@{DISPLAY\_MSG\_CHANGE\_USER}!ssd1306\_display.h@{ssd1306\_display.h}}\index{ssd1306\_display.h@{ssd1306\_display.h}!DISPLAY\_MSG\_CHANGE\_USER@{DISPLAY\_MSG\_CHANGE\_USER}}}\Hypertarget{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57a59acce404ea4ff2549ec02181eedb228}\label{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57a59acce404ea4ff2549ec02181eedb228} 
+DISPLAY\+\_\+\+MSG\+\_\+\+CHANGE\+\_\+\+USER&Mensajes para cambio de usuario \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DISPLAY\_MSG\_CUSTOM@{DISPLAY\_MSG\_CUSTOM}!ssd1306\_display.h@{ssd1306\_display.h}}\index{ssd1306\_display.h@{ssd1306\_display.h}!DISPLAY\_MSG\_CUSTOM@{DISPLAY\_MSG\_CUSTOM}}}\Hypertarget{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57a80bc66df2858a81a6e5d78a7233a8a0c}\label{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57a80bc66df2858a81a6e5d78a7233a8a0c} 
+DISPLAY\+\_\+\+MSG\+\_\+\+CUSTOM&Mensaje personalizado \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{ssd1306__display_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{ssd1306__display_8h_ae6a8a683054f1b4b4dda8be2e23d87f2}\index{ssd1306\_display.h@{ssd1306\_display.h}!display\_task@{display\_task}}
+\index{display\_task@{display\_task}!ssd1306\_display.h@{ssd1306\_display.h}}
+\doxysubsubsection{\texorpdfstring{display\_task()}{display\_task()}}
+{\footnotesize\ttfamily \label{ssd1306__display_8h_ae6a8a683054f1b4b4dda8be2e23d87f2} 
+void display\+\_\+task (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+
+
+Tarea de Free\+RTOS para manejar el display. 
+
+Esta tarea maneja la cola de comandos del display y actualiza la pantalla según los mensajes recibidos.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pv\+Parameters} & Parámetros de la tarea (no utilizados) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{ssd1306__display_8h_a289a5851baca6824f398a28c8741787e}\index{ssd1306\_display.h@{ssd1306\_display.h}!ssd1306\_init@{ssd1306\_init}}
+\index{ssd1306\_init@{ssd1306\_init}!ssd1306\_display.h@{ssd1306\_display.h}}
+\doxysubsubsection{\texorpdfstring{ssd1306\_init()}{ssd1306\_init()}}
+{\footnotesize\ttfamily \label{ssd1306__display_8h_a289a5851baca6824f398a28c8741787e} 
+bool ssd1306\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inicializa el display SSD1306 I2C. 
+
+Configura el hardware I2C, inicializa el display y prepara la pantalla para mostrar información del sistema.
+
+\begin{DoxyReturn}{Returns}
+true Si la inicialización fue exitosa 
+
+false Si hubo error en la inicialización 
+\end{DoxyReturn}
+\Hypertarget{ssd1306__display_8h_a2e74383909669c24cf6349c51d503314}\index{ssd1306\_display.h@{ssd1306\_display.h}!ssd1306\_send\_command@{ssd1306\_send\_command}}
+\index{ssd1306\_send\_command@{ssd1306\_send\_command}!ssd1306\_display.h@{ssd1306\_display.h}}
+\doxysubsubsection{\texorpdfstring{ssd1306\_send\_command()}{ssd1306\_send\_command()}}
+{\footnotesize\ttfamily \label{ssd1306__display_8h_a2e74383909669c24cf6349c51d503314} 
+bool ssd1306\+\_\+send\+\_\+command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57}{display\+\_\+message\+\_\+type\+\_\+t}}}]{type}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{custom\+\_\+message}{, }\item[{uint32\+\_\+t}]{display\+\_\+time\+\_\+ms}{}\end{DoxyParamCaption})}
+
+
+
+Envía un comando al display desde otras tareas. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & Tipo de mensaje a mostrar \\
+\hline
+{\em custom\+\_\+message} & Mensaje personalizado (puede ser NULL) \\
+\hline
+{\em display\+\_\+time\+\_\+ms} & Tiempo a mostrar el mensaje (0 = permanente) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true Si el comando se envió exitosamente 
+
+false Si hubo error al enviar el comando 
+\end{DoxyReturn}
+\Hypertarget{ssd1306__display_8h_aa8cc1916179e6a7cc7e069ee1d49d411}\index{ssd1306\_display.h@{ssd1306\_display.h}!ssd1306\_show\_message@{ssd1306\_show\_message}}
+\index{ssd1306\_show\_message@{ssd1306\_show\_message}!ssd1306\_display.h@{ssd1306\_display.h}}
+\doxysubsubsection{\texorpdfstring{ssd1306\_show\_message()}{ssd1306\_show\_message()}}
+{\footnotesize\ttfamily \label{ssd1306__display_8h_aa8cc1916179e6a7cc7e069ee1d49d411} 
+void ssd1306\+\_\+show\+\_\+message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ssd1306__display_8h_ab289d77234124d4d5a25730f92351d57}{display\+\_\+message\+\_\+type\+\_\+t}}}]{type}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{custom\+\_\+message}{}\end{DoxyParamCaption})}
+
+
+
+Muestra un mensaje en el display. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & Tipo de mensaje a mostrar \\
+\hline
+{\em custom\+\_\+message} & Mensaje personalizado (solo si type es DISPLAY\+\_\+\+MSG\+\_\+\+CUSTOM) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{ssd1306__display_8h_a77642cd34f52b24f424c868f230ed117}\index{ssd1306\_display.h@{ssd1306\_display.h}!ssd1306\_update\_datetime@{ssd1306\_update\_datetime}}
+\index{ssd1306\_update\_datetime@{ssd1306\_update\_datetime}!ssd1306\_display.h@{ssd1306\_display.h}}
+\doxysubsubsection{\texorpdfstring{ssd1306\_update\_datetime()}{ssd1306\_update\_datetime()}}
+{\footnotesize\ttfamily \label{ssd1306__display_8h_a77642cd34f52b24f424c868f230ed117} 
+void ssd1306\+\_\+update\+\_\+datetime (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Actualiza la fecha y hora en el display. 
+
+Esta función debe llamarse periódicamente para mantener actualizada la información de fecha y hora. 

@@ -1,0 +1,184 @@
+\doxysection{Free\+RTOSConfig.\+h File Reference}
+\hypertarget{_free_r_t_o_s_config_8h}{}\label{_free_r_t_o_s_config_8h}\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+
+
+Configuración de Free\+RTOS para Sistema de Control de Acceso.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_adde83486022745409c40605922b0bdd6}\label{_free_r_t_o_s_config_8h_adde83486022745409c40605922b0bdd6} 
+\#define {\bfseries config\+USE\+\_\+\+PREEMPTION}~1
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_aebb8c3a87d591f60f974772be0ee798d}\label{_free_r_t_o_s_config_8h_aebb8c3a87d591f60f974772be0ee798d} 
+\#define {\bfseries config\+USE\+\_\+\+PORT\+\_\+\+OPTIMISED\+\_\+\+TASK\+\_\+\+SELECTION}~0
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_aa19d69387b32a94d79ea52bb2c6f2649}\label{_free_r_t_o_s_config_8h_aa19d69387b32a94d79ea52bb2c6f2649} 
+\#define {\bfseries config\+USE\+\_\+\+TICKLESS\+\_\+\+IDLE}~0
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_aa68082df879e6fc96bcb9b26513639e7}\label{_free_r_t_o_s_config_8h_aa68082df879e6fc96bcb9b26513639e7} 
+\#define {\bfseries config\+CPU\+\_\+\+CLOCK\+\_\+\+HZ}~125000000
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a2f0258dd1e3b877e5bc013be54c2db6a}\label{_free_r_t_o_s_config_8h_a2f0258dd1e3b877e5bc013be54c2db6a} 
+\#define {\bfseries config\+TICK\+\_\+\+RATE\+\_\+\+HZ}~1000
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a9a78f5ac61e6cb172dadf2a51f11db38}\label{_free_r_t_o_s_config_8h_a9a78f5ac61e6cb172dadf2a51f11db38} 
+\#define {\bfseries config\+MAX\+\_\+\+PRIORITIES}~5
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a6c534a6cf8a00528fe0be42083484f9a}\label{_free_r_t_o_s_config_8h_a6c534a6cf8a00528fe0be42083484f9a} 
+\#define {\bfseries config\+MINIMAL\+\_\+\+STACK\+\_\+\+SIZE}~256
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_ac388dc4041aab6997348828eb27fc1a8}\label{_free_r_t_o_s_config_8h_ac388dc4041aab6997348828eb27fc1a8} 
+\#define {\bfseries config\+MAX\+\_\+\+TASK\+\_\+\+NAME\+\_\+\+LEN}~16
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_aac311ed9b9e5ae4d2d9648b33a24acce}\label{_free_r_t_o_s_config_8h_aac311ed9b9e5ae4d2d9648b33a24acce} 
+\#define {\bfseries config\+USE\+\_\+16\+\_\+\+BIT\+\_\+\+TICKS}~0
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_ad6a5061a742fee450ac455e4ad0f4b6c}\label{_free_r_t_o_s_config_8h_ad6a5061a742fee450ac455e4ad0f4b6c} 
+\#define {\bfseries config\+IDLE\+\_\+\+SHOULD\+\_\+\+YIELD}~1
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_aca14daeac974218ce2497f12d614fb6b}\label{_free_r_t_o_s_config_8h_aca14daeac974218ce2497f12d614fb6b} 
+\#define {\bfseries config\+USE\+\_\+\+TASK\+\_\+\+NOTIFICATIONS}~1
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a543bf3c79008974cc1d36bab51d94fbf}\label{_free_r_t_o_s_config_8h_a543bf3c79008974cc1d36bab51d94fbf} 
+\#define {\bfseries config\+USE\+\_\+\+MUTEXES}~1
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a9fe02d866cb1c4fbaa0c3de79f53d42d}\label{_free_r_t_o_s_config_8h_a9fe02d866cb1c4fbaa0c3de79f53d42d} 
+\#define {\bfseries config\+USE\+\_\+\+RECURSIVE\+\_\+\+MUTEXES}~1
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a55778995203c57369d2fbfb10224943d}\label{_free_r_t_o_s_config_8h_a55778995203c57369d2fbfb10224943d} 
+\#define {\bfseries config\+USE\+\_\+\+COUNTING\+\_\+\+SEMAPHORES}~1
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a7bfbcca89aaa971f59fe9233772cc33d}\label{_free_r_t_o_s_config_8h_a7bfbcca89aaa971f59fe9233772cc33d} 
+\#define {\bfseries config\+USE\+\_\+\+QUEUE\+\_\+\+SETS}~0
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a493c5763eb7a39bd80779a1c58de0d82}\label{_free_r_t_o_s_config_8h_a493c5763eb7a39bd80779a1c58de0d82} 
+\#define {\bfseries config\+USE\+\_\+\+TIME\+\_\+\+SLICING}~1
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_acf3616a8cbe15687f6000cefcca84bbd}\label{_free_r_t_o_s_config_8h_acf3616a8cbe15687f6000cefcca84bbd} 
+\#define {\bfseries config\+USE\+\_\+\+NEWLIB\+\_\+\+REENTRANT}~0
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_aa4b5138c4e42a180f0abd4f2455f90fb}\label{_free_r_t_o_s_config_8h_aa4b5138c4e42a180f0abd4f2455f90fb} 
+\#define {\bfseries config\+QUEUE\+\_\+\+REGISTRY\+\_\+\+SIZE}~10
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_ad8081822f3ebc7c917b63bd7bdd7bc58}\label{_free_r_t_o_s_config_8h_ad8081822f3ebc7c917b63bd7bdd7bc58} 
+\#define {\bfseries config\+GENERATE\+\_\+\+RUN\+\_\+\+TIME\+\_\+\+STATS}~0
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a27f5ee137dc9f125681a31f0b0a4b3be}\label{_free_r_t_o_s_config_8h_a27f5ee137dc9f125681a31f0b0a4b3be} 
+\#define {\bfseries config\+USE\+\_\+\+TRACE\+\_\+\+FACILITY}~1
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a5b7fae1e2f6d4fe42104ed8d28a0569d}\label{_free_r_t_o_s_config_8h_a5b7fae1e2f6d4fe42104ed8d28a0569d} 
+\#define {\bfseries config\+USE\+\_\+\+STATS\+\_\+\+FORMATTING\+\_\+\+FUNCTIONS}~0
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_ad6858ac8aaf726007fd19752956ef1bd}\label{_free_r_t_o_s_config_8h_ad6858ac8aaf726007fd19752956ef1bd} 
+\#define {\bfseries INCLUDE\+\_\+v\+Task\+Priority\+Set}~1
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a1279eb797355460aeeec06aa524e91df}\label{_free_r_t_o_s_config_8h_a1279eb797355460aeeec06aa524e91df} 
+\#define {\bfseries INCLUDE\+\_\+ux\+Task\+Priority\+Get}~1
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a5ae1434fdf995108dc749ff9329f53bd}\label{_free_r_t_o_s_config_8h_a5ae1434fdf995108dc749ff9329f53bd} 
+\#define {\bfseries INCLUDE\+\_\+v\+Task\+Delete}~1
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_aef8fbb97819ad3d962f334ac298206d1}\label{_free_r_t_o_s_config_8h_aef8fbb97819ad3d962f334ac298206d1} 
+\#define {\bfseries INCLUDE\+\_\+v\+Task\+Suspend}~1
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_ac99d9c3ef7d5fdeb24375ddeb9602b55}\label{_free_r_t_o_s_config_8h_ac99d9c3ef7d5fdeb24375ddeb9602b55} 
+\#define {\bfseries INCLUDE\+\_\+x\+Resume\+From\+ISR}~1
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_ae8459bfd5b428319bb10de9f504a53aa}\label{_free_r_t_o_s_config_8h_ae8459bfd5b428319bb10de9f504a53aa} 
+\#define {\bfseries INCLUDE\+\_\+v\+Task\+Delay\+Until}~1
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a24361a6eb816a965f1ee4e2e08e364f8}\label{_free_r_t_o_s_config_8h_a24361a6eb816a965f1ee4e2e08e364f8} 
+\#define {\bfseries INCLUDE\+\_\+v\+Task\+Delay}~1
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a9ed60ede556830584e6bfd4a3ab4f9de}\label{_free_r_t_o_s_config_8h_a9ed60ede556830584e6bfd4a3ab4f9de} 
+\#define {\bfseries INCLUDE\+\_\+x\+Task\+Get\+Scheduler\+State}~1
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_ac96b6a6e70667f266db4278be71cbd78}\label{_free_r_t_o_s_config_8h_ac96b6a6e70667f266db4278be71cbd78} 
+\#define {\bfseries INCLUDE\+\_\+x\+Task\+Get\+Current\+Task\+Handle}~1
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a23c7b4b41fe9b575cf2329c7cbe78b86}\label{_free_r_t_o_s_config_8h_a23c7b4b41fe9b575cf2329c7cbe78b86} 
+\#define {\bfseries INCLUDE\+\_\+ux\+Task\+Get\+Stack\+High\+Water\+Mark}~0
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_ae8811def4dd6983011fed9ef8686f18f}\label{_free_r_t_o_s_config_8h_ae8811def4dd6983011fed9ef8686f18f} 
+\#define {\bfseries INCLUDE\+\_\+x\+Task\+Get\+Idle\+Task\+Handle}~0
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a4fd1d67d54044ac86e8ffc890180f9f6}\label{_free_r_t_o_s_config_8h_a4fd1d67d54044ac86e8ffc890180f9f6} 
+\#define {\bfseries INCLUDE\+\_\+e\+Task\+Get\+State}~0
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_af93b5ef191e3e4bbf050119dacbd148b}\label{_free_r_t_o_s_config_8h_af93b5ef191e3e4bbf050119dacbd148b} 
+\#define {\bfseries INCLUDE\+\_\+x\+Event\+Group\+Set\+Bit\+From\+ISR}~1
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a4b4336acd61a8e513ca2376be84326b5}\label{_free_r_t_o_s_config_8h_a4b4336acd61a8e513ca2376be84326b5} 
+\#define {\bfseries INCLUDE\+\_\+x\+Timer\+Pend\+Function\+Call}~0
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_ac54efb28edcc1d3b9d0844005ea20674}\label{_free_r_t_o_s_config_8h_ac54efb28edcc1d3b9d0844005ea20674} 
+\#define {\bfseries INCLUDE\+\_\+x\+Task\+Abort\+Delay}~0
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a33733d2bbe005751ec3a417e5ac373bf}\label{_free_r_t_o_s_config_8h_a33733d2bbe005751ec3a417e5ac373bf} 
+\#define {\bfseries INCLUDE\+\_\+x\+Task\+Get\+Handle}~0
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a85e3dae9f3daa26f24e679cb6793811e}\label{_free_r_t_o_s_config_8h_a85e3dae9f3daa26f24e679cb6793811e} 
+\#define {\bfseries INCLUDE\+\_\+x\+Task\+Resume\+From\+ISR}~1
+\item 
+\#define \mbox{\hyperlink{_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{config\+ASSERT}}(x)
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a54bfc31c410ee452577a25a4552c3704}\label{_free_r_t_o_s_config_8h_a54bfc31c410ee452577a25a4552c3704} 
+\#define {\bfseries config\+MAX\+\_\+\+SYSCALL\+\_\+\+INTERRUPT\+\_\+\+PRIORITY}~(1UL $<$$<$ (8 -\/ config\+PRIO\+\_\+\+BITS))
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_ad43047b3ea0a146673e30637488bf754}\label{_free_r_t_o_s_config_8h_ad43047b3ea0a146673e30637488bf754} 
+\#define {\bfseries v\+Port\+SVCHandler}~SVC\+\_\+\+Handler
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a6f30022da7d797dd31f1b8a11cae9a35}\label{_free_r_t_o_s_config_8h_a6f30022da7d797dd31f1b8a11cae9a35} 
+\#define {\bfseries x\+Port\+Pend\+SVHandler}~Pend\+SV\+\_\+\+Handler
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_ae42e6318b5d564e44f97f8c765859448}\label{_free_r_t_o_s_config_8h_ae42e6318b5d564e44f97f8c765859448} 
+\#define {\bfseries x\+Port\+Sys\+Tick\+Handler}~Sys\+Tick\+\_\+\+Handler
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a9f213227674effff0122a75d94d87938}\label{_free_r_t_o_s_config_8h_a9f213227674effff0122a75d94d87938} 
+\#define {\bfseries config\+TOTAL\+\_\+\+HEAP\+\_\+\+SIZE}~(128 \texorpdfstring{$\ast$}{*} 1024)
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_ab86c1f2b90a06502fa94aaa0d5f12acd}\label{_free_r_t_o_s_config_8h_ab86c1f2b90a06502fa94aaa0d5f12acd} 
+\#define {\bfseries config\+KEYPAD\+\_\+\+QUEUE\+\_\+\+SIZE}~10
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a053e0fa216f1d67b4e8ea369ff02cd1f}\label{_free_r_t_o_s_config_8h_a053e0fa216f1d67b4e8ea369ff02cd1f} 
+\#define {\bfseries config\+ACCESS\+\_\+\+CONTROL\+\_\+\+QUEUE\+\_\+\+SIZE}~5
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_a4fa2f2abef4582a097ac2206ec73917d}\label{_free_r_t_o_s_config_8h_a4fa2f2abef4582a097ac2206ec73917d} 
+\#define {\bfseries config\+DISPLAY\+\_\+\+QUEUE\+\_\+\+SIZE}~5
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_free_r_t_o_s_config_8h_aa3cd3e43291e81e795d642b79b6088e6}\label{_free_r_t_o_s_config_8h_aa3cd3e43291e81e795d642b79b6088e6} 
+uint32\+\_\+t {\bfseries System\+Core\+Clock}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Configuración de Free\+RTOS para Sistema de Control de Acceso. 
+
+\begin{DoxyAuthor}{Author}
+Sistema de Control de Acceso 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2025
+\end{DoxyDate}
+Configuración optimizada para Raspberry Pi Pico con sistema de control de acceso que incluye teclado matricial, LEDs, base de datos y display SSD1306 I2C. 
+
+\label{doc-define-members}
+\Hypertarget{_free_r_t_o_s_config_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configASSERT@{configASSERT}}
+\index{configASSERT@{configASSERT}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{\texorpdfstring{configASSERT}{configASSERT}}
+{\footnotesize\ttfamily \label{_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f} 
+\#define config\+ASSERT(\begin{DoxyParamCaption}\item[{}]{x}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if}(\ (\ x\ )\ ==\ 0\ )\ \{\ taskDISABLE\_INTERRUPTS();\ \textcolor{keywordflow}{for}(\ ;;\ );\ \}}
+
+\end{DoxyCode}

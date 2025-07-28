@@ -1,0 +1,37 @@
+\doxysection{keypad.\+h}
+\hypertarget{keypad_8h_source}{}\label{keypad_8h_source}\mbox{\hyperlink{keypad_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#ifndef\ KEYPAD\_H}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ KEYPAD\_H}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}pico/stdlib.h"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS.h"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}queue.h"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}semphr.h"{}}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{keypad_8h_ae5567eabc884b77fdd8fbca9424a97efad8742eb3819217b8a36f89b00cfe5436}{KEYPAD\_IDLE}},\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{keypad_8h_ae5567eabc884b77fdd8fbca9424a97efaf51c1bf9a7ba4f8b4b69b02ca2949c33}{KEYPAD\_DEBOUNCE}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{keypad_8h_ae5567eabc884b77fdd8fbca9424a97efac760a13f3547e609e16de34496f24122}{KEYPAD\_COLUMN\_SCAN}},\ \ \ \ }
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{keypad_8h_ae5567eabc884b77fdd8fbca9424a97efa28491704d2f58d286eb232bc35817cf1}{KEYPAD\_PRESSED}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{keypad_8h_ae5567eabc884b77fdd8fbca9424a97efa326d8162976e8630a41042c8d7a27592}{KEYPAD\_RELEASED}}\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00031\ \}\ \mbox{\hyperlink{keypad_8h_ae5567eabc884b77fdd8fbca9424a97ef}{keypad\_fsm\_state\_t}};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structkeypad__event__t_a1b19a3c4367210c8d23c6852cb222008}{key}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structkeypad__event__t_aea0dbe09d369e20a8749721fe8e69a71}{timestamp}};\ \ \ \ \ }
+\DoxyCodeLine{00039\ \}\ \mbox{\hyperlink{structkeypad__event__t}{keypad\_event\_t}};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00047\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{keypad_8h_aaea5e45936380a42121fc758473fe130}{keypad\_init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00054\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{keypad_8h_a556232420635facc65ce14d5da028beb}{keypad\_task}}(\textcolor{keywordtype}{void}\ *pvParameters);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00064\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{keypad_8h_ae2752884ad1a52d2e01b688991ece986}{keypad\_get\_event}}(\mbox{\hyperlink{structkeypad__event__t}{keypad\_event\_t}}\ *event,\ uint32\_t\ timeout\_ms);}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00072\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{keypad_8h_a232df48ba4e4999316d70581ff6791ee}{keypad\_is\_idle}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ KEYPAD\_H}}
+
+\end{DoxyCode}

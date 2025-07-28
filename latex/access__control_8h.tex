@@ -1,0 +1,214 @@
+\doxysection{access\+\_\+control.\+h File Reference}
+\hypertarget{access__control_8h}{}\label{access__control_8h}\index{access\_control.h@{access\_control.h}}
+
+
+Controlador principal del sistema de control de acceso con Free\+RTOS.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}database.\+h"{}}\newline
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}queue.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structaccess__event__t}{access\+\_\+event\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Estructura para eventos del sistema de control de acceso. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{access__control_8h_a53bb6ce0dbc843daa4ad914d78713ac2}\label{access__control_8h_a53bb6ce0dbc843daa4ad914d78713ac2} 
+\#define {\bfseries TIMEOUT\+\_\+\+MS}~10000
+\begin{DoxyCompactList}\small\item\em Tiempo máximo para completar el proceso de autenticación. \end{DoxyCompactList}\item 
+\Hypertarget{access__control_8h_add56dedbc09f82766e39588e01978e7d}\label{access__control_8h_add56dedbc09f82766e39588e01978e7d} 
+\#define {\bfseries DEBOUNCE\+\_\+\+MS}~300
+\begin{DoxyCompactList}\small\item\em Tiempo de antirebote entre pulsaciones de teclas. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656eb}{system\+\_\+state\+\_\+t}} \{ \newline
+\mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebaaade5e53e88cf231292cd1142cce2afe}{STATE\+\_\+\+IDLE}}
+, \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656eba1a09058dc8f1cf2c48c7797f51cb8b15}{STATE\+\_\+\+ENTERING\+\_\+\+ID}}
+, \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebad5733f6faf91b80206460c1de3bb311d}{STATE\+\_\+\+ENTERING\+\_\+\+PASSWORD}}
+, \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebae1e8abe2f9b957551c5e29c972682c78}{STATE\+\_\+\+PROCESSING}}
+, \newline
+\mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656eba29cc72d2aba291ade8147bc46be1f9fb}{STATE\+\_\+\+ACCESS\+\_\+\+GRANTED}}
+, \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebaf2b7b4247821ed96c2229b60be731e96}{STATE\+\_\+\+ACCESS\+\_\+\+DENIED}}
+, \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656eba6e27fb619d38ca37bd366ac1e91010ff}{STATE\+\_\+\+TIMEOUT}}
+, \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebafe4ed08b77845e9e76f95ff5fa05f167}{STATE\+\_\+\+CHANGE\+\_\+\+PASSWORD}}
+, \newline
+\mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebafe14bd6f96f3eeea221fe9ac5a9ef7f0}{STATE\+\_\+\+CHANGE\+\_\+\+ENTERING\+\_\+\+ID}}
+, \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebabb9d1714a744485e3aacaf4e51dbf5d6}{STATE\+\_\+\+CHANGE\+\_\+\+ENTERING\+\_\+\+OLD\+\_\+\+PASS}}
+, \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656eba0110322259e21a682b6ffa8f874b0bf5}{STATE\+\_\+\+CHANGE\+\_\+\+ENTERING\+\_\+\+NEW\+\_\+\+PASS}}
+, \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebac6314b32f1d3c93c7dc4131c6d1cb8c4}{STATE\+\_\+\+CHANGE\+\_\+\+PROCESSING}}
+ \}
+\begin{DoxyCompactList}\small\item\em Estados posibles del sistema de control de acceso. \end{DoxyCompactList}\item 
+\Hypertarget{access__control_8h_ab2a9be0a5fd9ee8db06d4e1114c3e17b}\label{access__control_8h_ab2a9be0a5fd9ee8db06d4e1114c3e17b} 
+enum \mbox{\hyperlink{access__control_8h_ab2a9be0a5fd9ee8db06d4e1114c3e17b}{access\+\_\+event\+\_\+type\+\_\+t}} \{ {\bfseries ACCESS\+\_\+\+EVENT\+\_\+\+KEY\+\_\+\+PRESSED}
+, {\bfseries ACCESS\+\_\+\+EVENT\+\_\+\+TIMEOUT}
+, {\bfseries ACCESS\+\_\+\+EVENT\+\_\+\+RESET}
+ \}
+\begin{DoxyCompactList}\small\item\em Eventos del sistema de control de acceso. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{access__control_8h_a65f4e5f0056f6c9ded24e85b4755e511}{access\+\_\+control\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Inicializa el sistema de control de acceso. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{access__control_8h_a3fc313175743af5bbd0a4d5de78468d2}{access\+\_\+control\+\_\+task}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\begin{DoxyCompactList}\small\item\em Tarea de Free\+RTOS para el control de acceso. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{access__control_8h_af019a52d45b4f3e40c1770d754303266}{access\+\_\+control\+\_\+send\+\_\+event}} (\mbox{\hyperlink{access__control_8h_ab2a9be0a5fd9ee8db06d4e1114c3e17b}{access\+\_\+event\+\_\+type\+\_\+t}} type, char key)
+\begin{DoxyCompactList}\small\item\em Envía un evento al sistema de control de acceso. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656eb}{system\+\_\+state\+\_\+t}} \mbox{\hyperlink{access__control_8h_a7cc3a827a950d18c1aca063223786c61}{access\+\_\+control\+\_\+get\+\_\+state}} (void)
+\begin{DoxyCompactList}\small\item\em Obtiene el estado actual del sistema. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Controlador principal del sistema de control de acceso con Free\+RTOS. 
+
+\begin{DoxyAuthor}{Author}
+Sistema de Control de Acceso ~\newline
+ 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2025
+\end{DoxyDate}
+Este módulo implementa la máquina de estados principal del sistema de control de acceso utilizando Free\+RTOS para comunicación entre tareas. 
+
+\label{doc-enum-members}
+\Hypertarget{access__control_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{access__control_8h_aeaac97ef8a153a4e1abc636f535656eb}\index{access\_control.h@{access\_control.h}!system\_state\_t@{system\_state\_t}}
+\index{system\_state\_t@{system\_state\_t}!access\_control.h@{access\_control.h}}
+\doxysubsubsection{\texorpdfstring{system\_state\_t}{system\_state\_t}}
+{\footnotesize\ttfamily \label{access__control_8h_aeaac97ef8a153a4e1abc636f535656eb} 
+enum \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656eb}{system\+\_\+state\+\_\+t}}}
+
+
+
+Estados posibles del sistema de control de acceso. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STATE\_IDLE@{STATE\_IDLE}!access\_control.h@{access\_control.h}}\index{access\_control.h@{access\_control.h}!STATE\_IDLE@{STATE\_IDLE}}}\Hypertarget{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebaaade5e53e88cf231292cd1142cce2afe}\label{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebaaade5e53e88cf231292cd1142cce2afe} 
+STATE\+\_\+\+IDLE&Sistema en espera \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STATE\_ENTERING\_ID@{STATE\_ENTERING\_ID}!access\_control.h@{access\_control.h}}\index{access\_control.h@{access\_control.h}!STATE\_ENTERING\_ID@{STATE\_ENTERING\_ID}}}\Hypertarget{access__control_8h_aeaac97ef8a153a4e1abc636f535656eba1a09058dc8f1cf2c48c7797f51cb8b15}\label{access__control_8h_aeaac97ef8a153a4e1abc636f535656eba1a09058dc8f1cf2c48c7797f51cb8b15} 
+STATE\+\_\+\+ENTERING\+\_\+\+ID&Usuario ingresando ID \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STATE\_ENTERING\_PASSWORD@{STATE\_ENTERING\_PASSWORD}!access\_control.h@{access\_control.h}}\index{access\_control.h@{access\_control.h}!STATE\_ENTERING\_PASSWORD@{STATE\_ENTERING\_PASSWORD}}}\Hypertarget{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebad5733f6faf91b80206460c1de3bb311d}\label{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebad5733f6faf91b80206460c1de3bb311d} 
+STATE\+\_\+\+ENTERING\+\_\+\+PASSWORD&Usuario ingresando contraseña \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STATE\_PROCESSING@{STATE\_PROCESSING}!access\_control.h@{access\_control.h}}\index{access\_control.h@{access\_control.h}!STATE\_PROCESSING@{STATE\_PROCESSING}}}\Hypertarget{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebae1e8abe2f9b957551c5e29c972682c78}\label{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebae1e8abe2f9b957551c5e29c972682c78} 
+STATE\+\_\+\+PROCESSING&Sistema procesando autenticación \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STATE\_ACCESS\_GRANTED@{STATE\_ACCESS\_GRANTED}!access\_control.h@{access\_control.h}}\index{access\_control.h@{access\_control.h}!STATE\_ACCESS\_GRANTED@{STATE\_ACCESS\_GRANTED}}}\Hypertarget{access__control_8h_aeaac97ef8a153a4e1abc636f535656eba29cc72d2aba291ade8147bc46be1f9fb}\label{access__control_8h_aeaac97ef8a153a4e1abc636f535656eba29cc72d2aba291ade8147bc46be1f9fb} 
+STATE\+\_\+\+ACCESS\+\_\+\+GRANTED&Acceso concedido \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STATE\_ACCESS\_DENIED@{STATE\_ACCESS\_DENIED}!access\_control.h@{access\_control.h}}\index{access\_control.h@{access\_control.h}!STATE\_ACCESS\_DENIED@{STATE\_ACCESS\_DENIED}}}\Hypertarget{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebaf2b7b4247821ed96c2229b60be731e96}\label{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebaf2b7b4247821ed96c2229b60be731e96} 
+STATE\+\_\+\+ACCESS\+\_\+\+DENIED&Acceso denegado \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STATE\_TIMEOUT@{STATE\_TIMEOUT}!access\_control.h@{access\_control.h}}\index{access\_control.h@{access\_control.h}!STATE\_TIMEOUT@{STATE\_TIMEOUT}}}\Hypertarget{access__control_8h_aeaac97ef8a153a4e1abc636f535656eba6e27fb619d38ca37bd366ac1e91010ff}\label{access__control_8h_aeaac97ef8a153a4e1abc636f535656eba6e27fb619d38ca37bd366ac1e91010ff} 
+STATE\+\_\+\+TIMEOUT&Tiempo agotado durante el proceso \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STATE\_CHANGE\_PASSWORD@{STATE\_CHANGE\_PASSWORD}!access\_control.h@{access\_control.h}}\index{access\_control.h@{access\_control.h}!STATE\_CHANGE\_PASSWORD@{STATE\_CHANGE\_PASSWORD}}}\Hypertarget{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebafe4ed08b77845e9e76f95ff5fa05f167}\label{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebafe4ed08b77845e9e76f95ff5fa05f167} 
+STATE\+\_\+\+CHANGE\+\_\+\+PASSWORD&Modo de cambio de contraseña activo \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STATE\_CHANGE\_ENTERING\_ID@{STATE\_CHANGE\_ENTERING\_ID}!access\_control.h@{access\_control.h}}\index{access\_control.h@{access\_control.h}!STATE\_CHANGE\_ENTERING\_ID@{STATE\_CHANGE\_ENTERING\_ID}}}\Hypertarget{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebafe14bd6f96f3eeea221fe9ac5a9ef7f0}\label{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebafe14bd6f96f3eeea221fe9ac5a9ef7f0} 
+STATE\+\_\+\+CHANGE\+\_\+\+ENTERING\+\_\+\+ID&Cambio\+: ingresando ID de usuario \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STATE\_CHANGE\_ENTERING\_OLD\_PASS@{STATE\_CHANGE\_ENTERING\_OLD\_PASS}!access\_control.h@{access\_control.h}}\index{access\_control.h@{access\_control.h}!STATE\_CHANGE\_ENTERING\_OLD\_PASS@{STATE\_CHANGE\_ENTERING\_OLD\_PASS}}}\Hypertarget{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebabb9d1714a744485e3aacaf4e51dbf5d6}\label{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebabb9d1714a744485e3aacaf4e51dbf5d6} 
+STATE\+\_\+\+CHANGE\+\_\+\+ENTERING\+\_\+\+OLD\+\_\+\+PASS&Cambio\+: ingresando contraseña actual \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STATE\_CHANGE\_ENTERING\_NEW\_PASS@{STATE\_CHANGE\_ENTERING\_NEW\_PASS}!access\_control.h@{access\_control.h}}\index{access\_control.h@{access\_control.h}!STATE\_CHANGE\_ENTERING\_NEW\_PASS@{STATE\_CHANGE\_ENTERING\_NEW\_PASS}}}\Hypertarget{access__control_8h_aeaac97ef8a153a4e1abc636f535656eba0110322259e21a682b6ffa8f874b0bf5}\label{access__control_8h_aeaac97ef8a153a4e1abc636f535656eba0110322259e21a682b6ffa8f874b0bf5} 
+STATE\+\_\+\+CHANGE\+\_\+\+ENTERING\+\_\+\+NEW\+\_\+\+PASS&Cambio\+: ingresando nueva contraseña \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STATE\_CHANGE\_PROCESSING@{STATE\_CHANGE\_PROCESSING}!access\_control.h@{access\_control.h}}\index{access\_control.h@{access\_control.h}!STATE\_CHANGE\_PROCESSING@{STATE\_CHANGE\_PROCESSING}}}\Hypertarget{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebac6314b32f1d3c93c7dc4131c6d1cb8c4}\label{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebac6314b32f1d3c93c7dc4131c6d1cb8c4} 
+STATE\+\_\+\+CHANGE\+\_\+\+PROCESSING&Cambio\+: procesando cambio de contraseña \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{access__control_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{access__control_8h_a7cc3a827a950d18c1aca063223786c61}\index{access\_control.h@{access\_control.h}!access\_control\_get\_state@{access\_control\_get\_state}}
+\index{access\_control\_get\_state@{access\_control\_get\_state}!access\_control.h@{access\_control.h}}
+\doxysubsubsection{\texorpdfstring{access\_control\_get\_state()}{access\_control\_get\_state()}}
+{\footnotesize\ttfamily \label{access__control_8h_a7cc3a827a950d18c1aca063223786c61} 
+\mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656eb}{system\+\_\+state\+\_\+t}} access\+\_\+control\+\_\+get\+\_\+state (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Obtiene el estado actual del sistema. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{access__control_8h_aeaac97ef8a153a4e1abc636f535656eb}{system\+\_\+state\+\_\+t} Estado actual del sistema de control de acceso 
+\end{DoxyReturn}
+\Hypertarget{access__control_8h_a65f4e5f0056f6c9ded24e85b4755e511}\index{access\_control.h@{access\_control.h}!access\_control\_init@{access\_control\_init}}
+\index{access\_control\_init@{access\_control\_init}!access\_control.h@{access\_control.h}}
+\doxysubsubsection{\texorpdfstring{access\_control\_init()}{access\_control\_init()}}
+{\footnotesize\ttfamily \label{access__control_8h_a65f4e5f0056f6c9ded24e85b4755e511} 
+bool access\+\_\+control\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inicializa el sistema de control de acceso. 
+
+Configura el estado inicial del sistema, inicializa variables internas, y crea las colas necesarias para comunicación entre tareas.
+
+\begin{DoxyReturn}{Returns}
+true Si la inicialización fue exitosa 
+
+false Si hubo error en la inicialización 
+\end{DoxyReturn}
+\Hypertarget{access__control_8h_af019a52d45b4f3e40c1770d754303266}\index{access\_control.h@{access\_control.h}!access\_control\_send\_event@{access\_control\_send\_event}}
+\index{access\_control\_send\_event@{access\_control\_send\_event}!access\_control.h@{access\_control.h}}
+\doxysubsubsection{\texorpdfstring{access\_control\_send\_event()}{access\_control\_send\_event()}}
+{\footnotesize\ttfamily \label{access__control_8h_af019a52d45b4f3e40c1770d754303266} 
+bool access\+\_\+control\+\_\+send\+\_\+event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{access__control_8h_ab2a9be0a5fd9ee8db06d4e1114c3e17b}{access\+\_\+event\+\_\+type\+\_\+t}}}]{type}{, }\item[{char}]{key}{}\end{DoxyParamCaption})}
+
+
+
+Envía un evento al sistema de control de acceso. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & Tipo de evento \\
+\hline
+{\em key} & Tecla presionada (solo para KEY\+\_\+\+PRESSED) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true Si el evento se envió exitosamente 
+
+false Si hubo error al enviar el evento 
+\end{DoxyReturn}
+\Hypertarget{access__control_8h_a3fc313175743af5bbd0a4d5de78468d2}\index{access\_control.h@{access\_control.h}!access\_control\_task@{access\_control\_task}}
+\index{access\_control\_task@{access\_control\_task}!access\_control.h@{access\_control.h}}
+\doxysubsubsection{\texorpdfstring{access\_control\_task()}{access\_control\_task()}}
+{\footnotesize\ttfamily \label{access__control_8h_a3fc313175743af5bbd0a4d5de78468d2} 
+void access\+\_\+control\+\_\+task (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+
+
+Tarea de Free\+RTOS para el control de acceso. 
+
+Esta tarea maneja la máquina de estados del sistema de control de acceso, procesa eventos desde otras tareas y coordina las respuestas del sistema.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pv\+Parameters} & Parámetros de la tarea (no utilizados) \\
+\hline
+\end{DoxyParams}

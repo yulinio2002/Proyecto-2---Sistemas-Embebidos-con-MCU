@@ -1,0 +1,185 @@
+\doxysection{database.\+h File Reference}
+\hypertarget{database_8h}{}\label{database_8h}\index{database.h@{database.h}}
+
+
+Base de datos de usuarios para sistema de control de acceso.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structuser__t}{user\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Estructura que representa un usuario en la base de datos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{database_8h_a2c2a303621f66761529e598758d7ef34}\label{database_8h_a2c2a303621f66761529e598758d7ef34} 
+\#define {\bfseries MAX\+\_\+\+USERS}~10
+\begin{DoxyCompactList}\small\item\em Número máximo de usuarios en la base de datos. \end{DoxyCompactList}\item 
+\Hypertarget{database_8h_a74cd4c8a601dffc9976cb2016f09dd0d}\label{database_8h_a74cd4c8a601dffc9976cb2016f09dd0d} 
+\#define {\bfseries ID\+\_\+\+LENGTH}~6
+\begin{DoxyCompactList}\small\item\em Longitud del ID de usuario (6 dígitos) \end{DoxyCompactList}\item 
+\Hypertarget{database_8h_a0bbe35fda939018d5672a6cfc02cfa51}\label{database_8h_a0bbe35fda939018d5672a6cfc02cfa51} 
+\#define {\bfseries PASSWORD\+\_\+\+LENGTH}~4
+\begin{DoxyCompactList}\small\item\em Longitud de la contraseña (4 dígitos) \end{DoxyCompactList}\item 
+\Hypertarget{database_8h_a71faad8be7679cfd75fd9b993243f53e}\label{database_8h_a71faad8be7679cfd75fd9b993243f53e} 
+\#define {\bfseries MAX\+\_\+\+FAILED\+\_\+\+ATTEMPTS}~3
+\begin{DoxyCompactList}\small\item\em Número máximo de intentos fallidos antes de bloqueo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{database_8h_ad363601954b054a73b2db68dd2f96920}{auth\+\_\+result\+\_\+t}} \{ \mbox{\hyperlink{database_8h_ad363601954b054a73b2db68dd2f96920a15bfecd1f575ee18d4dd5d1cddcc3e02}{AUTH\+\_\+\+SUCCESS}}
+, \mbox{\hyperlink{database_8h_ad363601954b054a73b2db68dd2f96920ac599c6bac41d011c1a8e5bad4fecbdee}{AUTH\+\_\+\+USER\+\_\+\+NOT\+\_\+\+FOUND}}
+, \mbox{\hyperlink{database_8h_ad363601954b054a73b2db68dd2f96920aad6a08fd44676fdf1ab8821780845411}{AUTH\+\_\+\+WRONG\+\_\+\+PASSWORD}}
+, \mbox{\hyperlink{database_8h_ad363601954b054a73b2db68dd2f96920a2ac40b2966a784c9c97e077229dbc817}{AUTH\+\_\+\+USER\+\_\+\+BLOCKED}}
+ \}
+\begin{DoxyCompactList}\small\item\em Resultados posibles de la autenticación de usuario. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{database_8h_a1e8df27be8b0a376b797728005ed8e67}{database\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Inicializa la base de datos con usuarios predeterminados. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{database_8h_ad363601954b054a73b2db68dd2f96920}{auth\+\_\+result\+\_\+t}} \mbox{\hyperlink{database_8h_a3b23caca6cde6975952ea073ab8c3770}{authenticate\+\_\+user}} (const char \texorpdfstring{$\ast$}{*}id, const char \texorpdfstring{$\ast$}{*}password)
+\begin{DoxyCompactList}\small\item\em Autentica un usuario con ID y contraseña. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{database_8h_a2e6b3b46dde1a2ccd6d7d941f6217809}{change\+\_\+user\+\_\+password}} (const char \texorpdfstring{$\ast$}{*}id, const char \texorpdfstring{$\ast$}{*}old\+\_\+password, const char \texorpdfstring{$\ast$}{*}new\+\_\+password)
+\begin{DoxyCompactList}\small\item\em Cambia la contraseña de un usuario. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{database_8h_ae1225e20b3e83859aee09e0fb88e6649}{print\+\_\+database\+\_\+status}} (void)
+\begin{DoxyCompactList}\small\item\em Imprime el estado actual de todos los usuarios en la base de datos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base de datos de usuarios para sistema de control de acceso. 
+
+\begin{DoxyAuthor}{Author}
+Sistema de Control de Acceso 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2025
+\end{DoxyDate}
+Este módulo maneja la base de datos de usuarios del sistema, incluyendo autenticación, bloqueo por intentos fallidos y cambio de contraseñas. La base de datos se almacena en memoria RAM y se inicializa con usuarios predeterminados. 
+
+\label{doc-enum-members}
+\Hypertarget{database_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{database_8h_ad363601954b054a73b2db68dd2f96920}\index{database.h@{database.h}!auth\_result\_t@{auth\_result\_t}}
+\index{auth\_result\_t@{auth\_result\_t}!database.h@{database.h}}
+\doxysubsubsection{\texorpdfstring{auth\_result\_t}{auth\_result\_t}}
+{\footnotesize\ttfamily \label{database_8h_ad363601954b054a73b2db68dd2f96920} 
+enum \mbox{\hyperlink{database_8h_ad363601954b054a73b2db68dd2f96920}{auth\+\_\+result\+\_\+t}}}
+
+
+
+Resultados posibles de la autenticación de usuario. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AUTH\_SUCCESS@{AUTH\_SUCCESS}!database.h@{database.h}}\index{database.h@{database.h}!AUTH\_SUCCESS@{AUTH\_SUCCESS}}}\Hypertarget{database_8h_ad363601954b054a73b2db68dd2f96920a15bfecd1f575ee18d4dd5d1cddcc3e02}\label{database_8h_ad363601954b054a73b2db68dd2f96920a15bfecd1f575ee18d4dd5d1cddcc3e02} 
+AUTH\+\_\+\+SUCCESS&Autenticación exitosa \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AUTH\_USER\_NOT\_FOUND@{AUTH\_USER\_NOT\_FOUND}!database.h@{database.h}}\index{database.h@{database.h}!AUTH\_USER\_NOT\_FOUND@{AUTH\_USER\_NOT\_FOUND}}}\Hypertarget{database_8h_ad363601954b054a73b2db68dd2f96920ac599c6bac41d011c1a8e5bad4fecbdee}\label{database_8h_ad363601954b054a73b2db68dd2f96920ac599c6bac41d011c1a8e5bad4fecbdee} 
+AUTH\+\_\+\+USER\+\_\+\+NOT\+\_\+\+FOUND&ID de usuario no encontrado en la base de datos \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AUTH\_WRONG\_PASSWORD@{AUTH\_WRONG\_PASSWORD}!database.h@{database.h}}\index{database.h@{database.h}!AUTH\_WRONG\_PASSWORD@{AUTH\_WRONG\_PASSWORD}}}\Hypertarget{database_8h_ad363601954b054a73b2db68dd2f96920aad6a08fd44676fdf1ab8821780845411}\label{database_8h_ad363601954b054a73b2db68dd2f96920aad6a08fd44676fdf1ab8821780845411} 
+AUTH\+\_\+\+WRONG\+\_\+\+PASSWORD&Contraseña incorrecta \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AUTH\_USER\_BLOCKED@{AUTH\_USER\_BLOCKED}!database.h@{database.h}}\index{database.h@{database.h}!AUTH\_USER\_BLOCKED@{AUTH\_USER\_BLOCKED}}}\Hypertarget{database_8h_ad363601954b054a73b2db68dd2f96920a2ac40b2966a784c9c97e077229dbc817}\label{database_8h_ad363601954b054a73b2db68dd2f96920a2ac40b2966a784c9c97e077229dbc817} 
+AUTH\+\_\+\+USER\+\_\+\+BLOCKED&Usuario bloqueado por intentos fallidos \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{database_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{database_8h_a3b23caca6cde6975952ea073ab8c3770}\index{database.h@{database.h}!authenticate\_user@{authenticate\_user}}
+\index{authenticate\_user@{authenticate\_user}!database.h@{database.h}}
+\doxysubsubsection{\texorpdfstring{authenticate\_user()}{authenticate\_user()}}
+{\footnotesize\ttfamily \label{database_8h_a3b23caca6cde6975952ea073ab8c3770} 
+\mbox{\hyperlink{database_8h_ad363601954b054a73b2db68dd2f96920}{auth\+\_\+result\+\_\+t}} authenticate\+\_\+user (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{id}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{password}{}\end{DoxyParamCaption})}
+
+
+
+Autentica un usuario con ID y contraseña. 
+
+Busca el usuario en la base de datos y verifica su contraseña. Maneja el conteo de intentos fallidos y bloqueo automático.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & ID del usuario (6 dígitos como string) \\
+\hline
+{\em password} & Contraseña del usuario (4 dígitos como string)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{database_8h_ad363601954b054a73b2db68dd2f96920}{auth\+\_\+result\+\_\+t} Resultado de la autenticación
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Si la autenticación es exitosa, se resetea el contador de intentos fallidos 
+
+Al superar MAX\+\_\+\+FAILED\+\_\+\+ATTEMPTS, el usuario se bloquea permanentemente 
+\end{DoxyNote}
+\Hypertarget{database_8h_a2e6b3b46dde1a2ccd6d7d941f6217809}\index{database.h@{database.h}!change\_user\_password@{change\_user\_password}}
+\index{change\_user\_password@{change\_user\_password}!database.h@{database.h}}
+\doxysubsubsection{\texorpdfstring{change\_user\_password()}{change\_user\_password()}}
+{\footnotesize\ttfamily \label{database_8h_a2e6b3b46dde1a2ccd6d7d941f6217809} 
+bool change\+\_\+user\+\_\+password (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{id}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{old\+\_\+password}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{new\+\_\+password}{}\end{DoxyParamCaption})}
+
+
+
+Cambia la contraseña de un usuario. 
+
+Verifica la contraseña actual del usuario y la reemplaza por una nueva. Solo funciona si el usuario existe, no está bloqueado, y la contraseña actual es correcta.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & ID del usuario \\
+\hline
+{\em old\+\_\+password} & Contraseña actual del usuario \\
+\hline
+{\em new\+\_\+password} & Nueva contraseña a establecer\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true Si el cambio fue exitoso 
+
+false Si el cambio falló (usuario no encontrado, bloqueado, o contraseña incorrecta) 
+\end{DoxyReturn}
+\Hypertarget{database_8h_a1e8df27be8b0a376b797728005ed8e67}\index{database.h@{database.h}!database\_init@{database\_init}}
+\index{database\_init@{database\_init}!database.h@{database.h}}
+\doxysubsubsection{\texorpdfstring{database\_init()}{database\_init()}}
+{\footnotesize\ttfamily \label{database_8h_a1e8df27be8b0a376b797728005ed8e67} 
+void database\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inicializa la base de datos con usuarios predeterminados. 
+
+Carga la base de datos con 5 usuarios de prueba\+:
+\begin{DoxyItemize}
+\item ID\+: "{}123456"{}, Password\+: "{}1234"{}
+\item ID\+: "{}789012"{}, Password\+: "{}5678"{}
+\item ID\+: "{}345678"{}, Password\+: "{}9012"{}
+\item ID\+: "{}901234"{}, Password\+: "{}3456"{}
+\item ID\+: "{}567890"{}, Password\+: "{}7890"{}
+\end{DoxyItemize}
+
+Todos los usuarios inician sin bloqueos ni intentos fallidos. \Hypertarget{database_8h_ae1225e20b3e83859aee09e0fb88e6649}\index{database.h@{database.h}!print\_database\_status@{print\_database\_status}}
+\index{print\_database\_status@{print\_database\_status}!database.h@{database.h}}
+\doxysubsubsection{\texorpdfstring{print\_database\_status()}{print\_database\_status()}}
+{\footnotesize\ttfamily \label{database_8h_ae1225e20b3e83859aee09e0fb88e6649} 
+void print\+\_\+database\+\_\+status (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Imprime el estado actual de todos los usuarios en la base de datos. 
+
+Función de diagnóstico que muestra información de todos los usuarios\+: ID, número de intentos fallidos, y estado de bloqueo.
+
+\begin{DoxyNote}{Note}
+Solo para propósitos de depuración y diagnóstico 
+\end{DoxyNote}

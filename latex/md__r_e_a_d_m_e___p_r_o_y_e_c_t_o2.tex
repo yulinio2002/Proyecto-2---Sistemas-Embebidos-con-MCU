@@ -1,0 +1,232 @@
+\chapter{Sistema de Control de Acceso con Free\+RTOS y Display SSD1306 }
+\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2}{}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2}\index{Sistema de Control de Acceso con FreeRTOS y Display SSD1306@{Sistema de Control de Acceso con FreeRTOS y Display SSD1306}}
+\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md0}%
+\Hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md0}%
+\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md1}{}\doxysection{\texorpdfstring{Descripción del Proyecto}{Descripción del Proyecto}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md1}
+Este proyecto implementa un sistema de control de acceso completo utilizando Free\+RTOS como sistema operativo en tiempo real. El sistema migra la funcionalidad del Proyecto 1 a una arquitectura basada en tareas concurrentes y agrega un display SSD1306 I2C como interfaz de usuario.\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md2}{}\doxysection{\texorpdfstring{Características del Sistema}{Características del Sistema}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md2}
+\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md3}{}\doxysubsection{\texorpdfstring{Hardware Requerido}{Hardware Requerido}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md3}
+
+\begin{DoxyItemize}
+\item {\bfseries{Microcontrolador}}\+: Raspberry Pi Pico
+\item {\bfseries{Teclado}}\+: Matricial 4x4
+\item {\bfseries{LEDs}}\+: 3 LEDs de señalización (Verde, Rojo, Amarillo)
+\item {\bfseries{Display}}\+: SSD1306 OLED I2C 128x32 píxeles
+\item {\bfseries{Resistencias}}\+: Limitadoras de corriente para LEDs
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md4}{}\doxysubsection{\texorpdfstring{Conexiones de Hardware}{Conexiones de Hardware}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md4}
+\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md5}{}\doxysubsubsection{\texorpdfstring{Teclado Matricial 4x4}{Teclado Matricial 4x4}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md5}
+
+\begin{DoxyItemize}
+\item {\bfseries{Filas}}\+: GP6, GP7, GP8, GP9
+\item {\bfseries{Columnas}}\+: GP10, GP11, GP12, GP13
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md6}{}\doxysubsubsection{\texorpdfstring{LEDs de Señalización}{LEDs de Señalización}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md6}
+
+\begin{DoxyItemize}
+\item {\bfseries{LED Verde}} (Acceso Concedido)\+: GP15
+\item {\bfseries{LED Rojo}} (Acceso Denegado)\+: GP16
+\item {\bfseries{LED Amarillo}} (Estado del Sistema)\+: GP17
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md7}{}\doxysubsubsection{\texorpdfstring{Display SSD1306 I2C}{Display SSD1306 I2C}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md7}
+
+\begin{DoxyItemize}
+\item {\bfseries{SDA}}\+: GP4 (PICO\+\_\+\+DEFAULT\+\_\+\+I2\+C\+\_\+\+SDA\+\_\+\+PIN)
+\item {\bfseries{SCL}}\+: GP5 (PICO\+\_\+\+DEFAULT\+\_\+\+I2\+C\+\_\+\+SCL\+\_\+\+PIN)
+\item {\bfseries{VCC}}\+: 3.\+3V
+\item {\bfseries{GND}}\+: GND
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md8}{}\doxysection{\texorpdfstring{Arquitectura del Sistema}{Arquitectura del Sistema}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md8}
+\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md9}{}\doxysubsection{\texorpdfstring{Tareas de Free\+RTOS}{Tareas de Free\+RTOS}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md9}
+El sistema está dividido en 4 tareas principales que se ejecutan concurrentemente\+:
+
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Tarea del Teclado}} ({\ttfamily keypad\+\_\+task})
+\begin{DoxyItemize}
+\item {\bfseries{Prioridad}}\+: 4 (Alta)
+\item {\bfseries{Stack}}\+: 512 bytes
+\item {\bfseries{Función}}\+: Escanea continuamente el teclado matricial y envía eventos a través de colas
+\end{DoxyItemize}
+\item {\bfseries{Tarea de LEDs}} ({\ttfamily led\+\_\+task})
+\begin{DoxyItemize}
+\item {\bfseries{Prioridad}}\+: 3 (Media)
+\item {\bfseries{Stack}}\+: 256 bytes
+\item {\bfseries{Función}}\+: Maneja todos los patrones de LEDs incluyendo parpadeo automático
+\end{DoxyItemize}
+\item {\bfseries{Tarea del Display}} ({\ttfamily display\+\_\+task})
+\begin{DoxyItemize}
+\item {\bfseries{Prioridad}}\+: 3 (Media)
+\item {\bfseries{Stack}}\+: 1024 bytes
+\item {\bfseries{Función}}\+: Actualiza el display con mensajes del sistema y fecha/hora
+\end{DoxyItemize}
+\item {\bfseries{Tarea de Control de Acceso}} ({\ttfamily access\+\_\+control\+\_\+task})
+\begin{DoxyItemize}
+\item {\bfseries{Prioridad}}\+: 5 (Más Alta)
+\item {\bfseries{Stack}}\+: 512 bytes
+\item {\bfseries{Función}}\+: Implementa la máquina de estados principal del sistema
+\end{DoxyItemize}
+\end{DoxyEnumerate}\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md10}{}\doxysubsection{\texorpdfstring{Comunicación Entre Tareas}{Comunicación Entre Tareas}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md10}
+Las tareas se comunican utilizando {\bfseries{colas de Free\+RTOS}}\+:
+\begin{DoxyItemize}
+\item {\bfseries{Cola del Teclado}}\+: Envía eventos de teclas presionadas
+\item {\bfseries{Cola de LEDs}}\+: Recibe comandos para controlar los LEDs
+\item {\bfseries{Cola del Display}}\+: Recibe comandos para actualizar la pantalla
+\item {\bfseries{Cola de Control de Acceso}}\+: Maneja eventos del sistema como timeouts
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md11}{}\doxysection{\texorpdfstring{Funcionalidad del Display SSD1306}{Funcionalidad del Display SSD1306}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md11}
+\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md12}{}\doxysubsection{\texorpdfstring{Mensajes del Sistema}{Mensajes del Sistema}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md12}
+El display muestra diferentes mensajes según el estado del sistema\+:
+
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Estado de Espera}}\+:
+\begin{DoxyItemize}
+\item Muestra "{}\+SISTEMA ACCESO"{} y fecha/hora actualizada cada segundo
+\end{DoxyItemize}
+\item {\bfseries{Ingreso de ID}}\+:
+\begin{DoxyItemize}
+\item Muestra "{}\+INGRESE SU ID"{}
+\end{DoxyItemize}
+\item {\bfseries{Ingreso de Contraseña}}\+:
+\begin{DoxyItemize}
+\item Muestra "{}\+INGRESE SU CONTRASENA"{}
+\end{DoxyItemize}
+\item {\bfseries{Acceso Concedido}}\+:
+\begin{DoxyItemize}
+\item Muestra "{}\+BIENVENIDO"{} por 5 segundos
+\end{DoxyItemize}
+\item {\bfseries{Acceso Denegado}}\+:
+\begin{DoxyItemize}
+\item Muestra "{}\+USUARIO O CONTRASENA INVALIDOS"{} por 3 segundos
+\end{DoxyItemize}
+\item {\bfseries{Cambio de Usuario}}\+:
+\begin{DoxyItemize}
+\item Muestra mensajes específicos para el proceso de cambio de contraseña
+\end{DoxyItemize}
+\end{DoxyEnumerate}\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md13}{}\doxysection{\texorpdfstring{Señalización LED}{Señalización LED}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md13}
+\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md14}{}\doxysubsection{\texorpdfstring{Patrones de LEDs}{Patrones de LEDs}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md14}
+
+\begin{DoxyItemize}
+\item {\bfseries{LED Amarillo Encendido}}\+: Sistema en espera, listo para recibir entrada
+\item {\bfseries{LED Amarillo Apagado}}\+: Usuario ingresando ID
+\item {\bfseries{LED Amarillo Parpadeando}}\+: Usuario ingresando contraseña
+\item {\bfseries{LED Verde 5 segundos}}\+: Acceso concedido
+\item {\bfseries{LED Rojo 2 segundos}}\+: Acceso denegado
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md15}{}\doxysection{\texorpdfstring{Base de Datos de Usuarios}{Base de Datos de Usuarios}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md15}
+\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md16}{}\doxysubsection{\texorpdfstring{Usuarios Predeterminados}{Usuarios Predeterminados}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md16}
+El sistema incluye 5 usuarios de prueba\+:
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ ID  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Contraseña  }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ ID  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Contraseña  }\\\cline{1-2}
+\endhead
+123456  &1234  \\\cline{1-2}
+789012  &5678  \\\cline{1-2}
+345678  &9012  \\\cline{1-2}
+901234  &3456  \\\cline{1-2}
+567890  &7890  \\\cline{1-2}
+\end{longtabu}
+\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md17}{}\doxysubsection{\texorpdfstring{Funcionalidades de Seguridad}{Funcionalidades de Seguridad}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md17}
+
+\begin{DoxyItemize}
+\item {\bfseries{Bloqueo por Intentos Fallidos}}\+: 3 intentos máximos antes de bloqueo
+\item {\bfseries{Timeout del Sistema}}\+: 10 segundos para completar el proceso
+\item {\bfseries{Cambio de Contraseña}}\+: Presionar \textquotesingle{}\texorpdfstring{$\ast$}{*}\textquotesingle{} al inicio para activar modo de cambio
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md18}{}\doxysection{\texorpdfstring{Compilación y Uso}{Compilación y Uso}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md18}
+\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md19}{}\doxysubsection{\texorpdfstring{Requisitos de Software}{Requisitos de Software}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md19}
+
+\begin{DoxyItemize}
+\item {\bfseries{SDK}}\+: Raspberry Pi Pico SDK 2.\+1.\+1
+\item {\bfseries{Free\+RTOS}}\+: Kernel incluido en el SDK
+\item {\bfseries{Toolchain}}\+: ARM GCC 14\+\_\+2\+\_\+\+Rel1
+\item {\bfseries{Build System}}\+: CMake + Ninja
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md20}{}\doxysubsection{\texorpdfstring{Comandos de Compilación}{Comandos de Compilación}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md20}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Compilar\ el\ proyecto}
+\DoxyCodeLine{ninja\ -\/C\ build}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ O\ usar\ la\ tarea\ de\ VS\ Code}
+\DoxyCodeLine{Ctrl+Shift+P\ -\/>\ "{}Tasks:\ Run\ Task"{}\ -\/>\ "{}Compile\ Project"{}}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md21}{}\doxysubsection{\texorpdfstring{Archivos Principales}{Archivos Principales}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md21}
+
+\begin{DoxyItemize}
+\item {\bfseries{{\ttfamily \doxylink{main__rtos_8c}{main\+\_\+rtos.\+c}}}}\+: Función principal y configuración de tareas
+\item {\bfseries{{\ttfamily keypad\+\_\+rtos.\+c}}}\+: Controlador del teclado para Free\+RTOS
+\item {\bfseries{{\ttfamily leds\+\_\+rtos.\+c}}}\+: Controlador de LEDs para Free\+RTOS
+\item {\bfseries{{\ttfamily access\+\_\+control\+\_\+rtos.\+c}}}\+: Lógica de control de acceso para Free\+RTOS
+\item {\bfseries{{\ttfamily \doxylink{ssd1306__display_8c}{ssd1306\+\_\+display.\+c}}}}\+: Driver del display SSD1306
+\item {\bfseries{{\ttfamily \doxylink{_free_r_t_o_s_config_8h}{Free\+RTOSConfig.\+h}}}}\+: Configuración del sistema operativo
+\item {\bfseries{{\ttfamily database.\+c}}}\+: Base de datos de usuarios (sin cambios)
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md22}{}\doxysection{\texorpdfstring{Uso del Sistema}{Uso del Sistema}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md22}
+\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md23}{}\doxysubsection{\texorpdfstring{Proceso de Autenticación Normal}{Proceso de Autenticación Normal}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md23}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Estado Inicial}}\+: Display muestra fecha/hora, LED amarillo encendido
+\item {\bfseries{Ingreso de ID}}\+: Presionar dígitos (0-\/9), luego \textquotesingle{}\#\textquotesingle{} para confirmar
+\item {\bfseries{Ingreso de Contraseña}}\+: Presionar dígitos (0-\/9), luego \textquotesingle{}\#\textquotesingle{} para confirmar
+\item {\bfseries{Resultado}}\+:
+\begin{DoxyItemize}
+\item {\bfseries{Éxito}}\+: LED verde 5 seg, display "{}\+BIENVENIDO"{}
+\item {\bfseries{Fallo}}\+: LED rojo 2 seg, display "{}\+USUARIO O CONTRASENA INVALIDOS"{}
+\end{DoxyItemize}
+\end{DoxyEnumerate}\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md24}{}\doxysubsection{\texorpdfstring{Cambio de Contraseña}{Cambio de Contraseña}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md24}
+
+\begin{DoxyEnumerate}
+\item Presionar \textquotesingle{}\texorpdfstring{$\ast$}{*}\textquotesingle{} en estado inicial
+\item El sistema entra en modo de cambio de contraseña
+\item Seguir las instrucciones en el display
+\end{DoxyEnumerate}\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md25}{}\doxysubsection{\texorpdfstring{Cancelación}{Cancelación}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md25}
+
+\begin{DoxyItemize}
+\item Presionar \textquotesingle{}\texorpdfstring{$\ast$}{*}\textquotesingle{} en cualquier momento durante el proceso para cancelar y volver al estado inicial
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md26}{}\doxysection{\texorpdfstring{Características Técnicas de Free\+RTOS}{Características Técnicas de Free\+RTOS}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md26}
+\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md27}{}\doxysubsection{\texorpdfstring{Configuración del Kernel}{Configuración del Kernel}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md27}
+
+\begin{DoxyItemize}
+\item {\bfseries{Frecuencia del Tick}}\+: 1000 Hz (1ms por tick)
+\item {\bfseries{Heap Size}}\+: 128 KB
+\item {\bfseries{Algoritmo de Heap}}\+: heap\+\_\+4 (coalescencia automática)
+\item {\bfseries{Scheduler}}\+: Preemptivo con time slicing
+\item {\bfseries{Prioridades}}\+: 5 niveles (0-\/4)
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md28}{}\doxysubsection{\texorpdfstring{Optimizaciones}{Optimizaciones}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md28}
+
+\begin{DoxyItemize}
+\item {\bfseries{Memoria}}\+: Stacks optimizados por tarea
+\item {\bfseries{CPU}}\+: Prioridades balanceadas para respuesta rápida
+\item {\bfseries{Energía}}\+: Uso del hook idle para optimización futura
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md29}{}\doxysection{\texorpdfstring{Manejo de Errores}{Manejo de Errores}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md29}
+\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md30}{}\doxysubsection{\texorpdfstring{Hooks de Free\+RTOS}{Hooks de Free\+RTOS}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md30}
+El sistema incluye hooks para manejo de errores críticos\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{{\ttfamily \doxylink{main__rtos_8c_ab7e5c95cf72a3f819bc4462a7fb62ca3}{v\+Application\+Malloc\+Failed\+Hook()}}}}\+: Memoria agotada
+\item {\bfseries{{\ttfamily \doxylink{main__rtos_8c_a306672a74bdd13ce210c05fca3385c59}{v\+Application\+Stack\+Overflow\+Hook()}}}}\+: Desbordamiento de stack
+\item {\bfseries{{\ttfamily \doxylink{main__rtos_8c_a97fd430f36f8b065226e2bff9bad1de5}{v\+Application\+Idle\+Hook()}}}}\+: Tarea idle (optimización energética)
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md31}{}\doxysubsection{\texorpdfstring{Señalización de Errores}{Señalización de Errores}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md31}
+
+\begin{DoxyItemize}
+\item {\bfseries{LED Rojo Parpadeando Rápido}}\+: Error de memoria
+\item {\bfseries{LED Amarillo Parpadeando Rápido}}\+: Desbordamiento de stack
+\item {\bfseries{Mensajes por Puerto Serie}}\+: Información detallada de errores
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md32}{}\doxysection{\texorpdfstring{Futuras Mejoras}{Futuras Mejoras}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md32}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Comunicación UART/\+SPI}}\+: Para sistemas distribuidos
+\item {\bfseries{Almacenamiento Flash}}\+: Persistencia de usuarios y configuración
+\item {\bfseries{Red Wi\+Fi}}\+: Acceso remoto y logging
+\item {\bfseries{Sensores Adicionales}}\+: Detección de presencia, temperatura
+\item {\bfseries{Interfaz Web}}\+: Configuración y monitoreo remoto
+\end{DoxyEnumerate}\hypertarget{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md33}{}\doxysection{\texorpdfstring{Autor}{Autor}}\label{md__r_e_a_d_m_e___p_r_o_y_e_c_t_o2_autotoc_md33}
+{\bfseries{Sistema de Control de Acceso}} ~\newline
+ Desarrollado para el curso de Sistemas Embebidos ~\newline
+ Fecha\+: 2025
+
+\DoxyHorRuler{0}
+
+
+{\itshape Este proyecto demuestra el uso efectivo de Free\+RTOS para sistemas embebidos complejos, implementando comunicación entre tareas, manejo de recursos compartidos y interfaces de usuario avanzadas.} 

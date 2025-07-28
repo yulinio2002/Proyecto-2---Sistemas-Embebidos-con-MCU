@@ -1,0 +1,59 @@
+\doxysection{user\+\_\+t Struct Reference}
+\hypertarget{structuser__t}{}\label{structuser__t}\index{user\_t@{user\_t}}
+
+
+Estructura que representa un usuario en la base de datos.  
+
+
+
+
+{\ttfamily \#include $<$database.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+char \mbox{\hyperlink{structuser__t_ac27bcbae89019563f100a046b389d971}{id}} \mbox{[}\mbox{\hyperlink{database_8h_a74cd4c8a601dffc9976cb2016f09dd0d}{ID\+\_\+\+LENGTH}}+1\mbox{]}
+\item 
+char \mbox{\hyperlink{structuser__t_a48d25bd08dfec2b214a7132b2047955e}{password}} \mbox{[}\mbox{\hyperlink{database_8h_a0bbe35fda939018d5672a6cfc02cfa51}{PASSWORD\+\_\+\+LENGTH}}+1\mbox{]}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structuser__t_a25abdcbc2e56895b7dc81a826f8b9ef2}{failed\+\_\+attempts}}
+\item 
+bool \mbox{\hyperlink{structuser__t_a906dc68771bddeaee81416253e675e0d}{blocked}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Estructura que representa un usuario en la base de datos. 
+
+\label{doc-variable-members}
+\Hypertarget{structuser__t_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structuser__t_a906dc68771bddeaee81416253e675e0d}\index{user\_t@{user\_t}!blocked@{blocked}}
+\index{blocked@{blocked}!user\_t@{user\_t}}
+\doxysubsubsection{\texorpdfstring{blocked}{blocked}}
+{\footnotesize\ttfamily \label{structuser__t_a906dc68771bddeaee81416253e675e0d} 
+bool user\+\_\+t\+::blocked}
+
+Estado de bloqueo del usuario \Hypertarget{structuser__t_a25abdcbc2e56895b7dc81a826f8b9ef2}\index{user\_t@{user\_t}!failed\_attempts@{failed\_attempts}}
+\index{failed\_attempts@{failed\_attempts}!user\_t@{user\_t}}
+\doxysubsubsection{\texorpdfstring{failed\_attempts}{failed\_attempts}}
+{\footnotesize\ttfamily \label{structuser__t_a25abdcbc2e56895b7dc81a826f8b9ef2} 
+uint8\+\_\+t user\+\_\+t\+::failed\+\_\+attempts}
+
+Contador de intentos fallidos consecutivos \Hypertarget{structuser__t_ac27bcbae89019563f100a046b389d971}\index{user\_t@{user\_t}!id@{id}}
+\index{id@{id}!user\_t@{user\_t}}
+\doxysubsubsection{\texorpdfstring{id}{id}}
+{\footnotesize\ttfamily \label{structuser__t_ac27bcbae89019563f100a046b389d971} 
+char user\+\_\+t\+::id\mbox{[}\mbox{\hyperlink{database_8h_a74cd4c8a601dffc9976cb2016f09dd0d}{ID\+\_\+\+LENGTH}}+1\mbox{]}}
+
+ID de 6 dígitos + terminador nulo \Hypertarget{structuser__t_a48d25bd08dfec2b214a7132b2047955e}\index{user\_t@{user\_t}!password@{password}}
+\index{password@{password}!user\_t@{user\_t}}
+\doxysubsubsection{\texorpdfstring{password}{password}}
+{\footnotesize\ttfamily \label{structuser__t_a48d25bd08dfec2b214a7132b2047955e} 
+char user\+\_\+t\+::password\mbox{[}\mbox{\hyperlink{database_8h_a0bbe35fda939018d5672a6cfc02cfa51}{PASSWORD\+\_\+\+LENGTH}}+1\mbox{]}}
+
+Contraseña de 4 dígitos + terminador nulo 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{database_8h}{database.\+h}}\end{DoxyCompactItemize}

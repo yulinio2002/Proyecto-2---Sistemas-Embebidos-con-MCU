@@ -1,0 +1,56 @@
+\doxysection{access\+\_\+control.\+h}
+\hypertarget{access__control_8h_source}{}\label{access__control_8h_source}\mbox{\hyperlink{access__control_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifndef\ ACCESS\_CONTROL\_H}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ ACCESS\_CONTROL\_H}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{database_8h}{database.h}}"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}FreeRTOS.h"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}queue.h"{}}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebaaade5e53e88cf231292cd1142cce2afe}{STATE\_IDLE}},\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656eba1a09058dc8f1cf2c48c7797f51cb8b15}{STATE\_ENTERING\_ID}},\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebad5733f6faf91b80206460c1de3bb311d}{STATE\_ENTERING\_PASSWORD}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebae1e8abe2f9b957551c5e29c972682c78}{STATE\_PROCESSING}},\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656eba29cc72d2aba291ade8147bc46be1f9fb}{STATE\_ACCESS\_GRANTED}},\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebaf2b7b4247821ed96c2229b60be731e96}{STATE\_ACCESS\_DENIED}},\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656eba6e27fb619d38ca37bd366ac1e91010ff}{STATE\_TIMEOUT}},\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebafe4ed08b77845e9e76f95ff5fa05f167}{STATE\_CHANGE\_PASSWORD}},\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebafe14bd6f96f3eeea221fe9ac5a9ef7f0}{STATE\_CHANGE\_ENTERING\_ID}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebabb9d1714a744485e3aacaf4e51dbf5d6}{STATE\_CHANGE\_ENTERING\_OLD\_PASS}},\ }
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656eba0110322259e21a682b6ffa8f874b0bf5}{STATE\_CHANGE\_ENTERING\_NEW\_PASS}},\ }
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656ebac6314b32f1d3c93c7dc4131c6d1cb8c4}{STATE\_CHANGE\_PROCESSING}}\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00036\ \}\ \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656eb}{system\_state\_t}};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ ACCESS\_EVENT\_KEY\_PRESSED,}
+\DoxyCodeLine{00043\ \ \ \ \ ACCESS\_EVENT\_TIMEOUT,}
+\DoxyCodeLine{00044\ \ \ \ \ ACCESS\_EVENT\_RESET}
+\DoxyCodeLine{00045\ \}\ \mbox{\hyperlink{access__control_8h_ab2a9be0a5fd9ee8db06d4e1114c3e17b}{access\_event\_type\_t}};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00050\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{access__control_8h_ab2a9be0a5fd9ee8db06d4e1114c3e17b}{access\_event\_type\_t}}\ type;}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structaccess__event__t_af3c7fd1278ab874a31af629df27d0ca6}{key}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00053\ \ \ \ \ uint32\_t\ timestamp;}
+\DoxyCodeLine{00054\ \}\ \mbox{\hyperlink{structaccess__event__t}{access\_event\_t}};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#define\ TIMEOUT\_MS\ 10000\ \ \ \ }}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#define\ DEBOUNCE\_MS\ 300\ \ \ \ \ }}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00071\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{access__control_8h_a65f4e5f0056f6c9ded24e85b4755e511}{access\_control\_init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00081\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{access__control_8h_a3fc313175743af5bbd0a4d5de78468d2}{access\_control\_task}}(\textcolor{keywordtype}{void}\ *pvParameters);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00091\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{access__control_8h_af019a52d45b4f3e40c1770d754303266}{access\_control\_send\_event}}(\mbox{\hyperlink{access__control_8h_ab2a9be0a5fd9ee8db06d4e1114c3e17b}{access\_event\_type\_t}}\ type,\ \textcolor{keywordtype}{char}\ key);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00098\ \mbox{\hyperlink{access__control_8h_aeaac97ef8a153a4e1abc636f535656eb}{system\_state\_t}}\ \mbox{\hyperlink{access__control_8h_a7cc3a827a950d18c1aca063223786c61}{access\_control\_get\_state}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ACCESS\_CONTROL\_H}}
+
+\end{DoxyCode}

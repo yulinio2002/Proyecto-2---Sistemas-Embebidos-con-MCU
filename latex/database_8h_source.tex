@@ -1,0 +1,44 @@
+\doxysection{database.\+h}
+\hypertarget{database_8h_source}{}\label{database_8h_source}\mbox{\hyperlink{database_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#ifndef\ DATABASE\_H}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ DATABASE\_H}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ MAX\_USERS\ 10}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ ID\_LENGTH\ 6}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ PASSWORD\_LENGTH\ 4}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#define\ MAX\_FAILED\_ATTEMPTS\ 3}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{char}\ \textcolor{keywordtype}{id}[\mbox{\hyperlink{database_8h_a74cd4c8a601dffc9976cb2016f09dd0d}{ID\_LENGTH}}\ +\ 1];\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structuser__t_a48d25bd08dfec2b214a7132b2047955e}{password}}[\mbox{\hyperlink{database_8h_a0bbe35fda939018d5672a6cfc02cfa51}{PASSWORD\_LENGTH}}\ +\ 1];\ }
+\DoxyCodeLine{00037\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structuser__t_a25abdcbc2e56895b7dc81a826f8b9ef2}{failed\_attempts}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structuser__t_a906dc68771bddeaee81416253e675e0d}{blocked}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00039\ \}\ \mbox{\hyperlink{structuser__t}{user\_t}};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{database_8h_ad363601954b054a73b2db68dd2f96920a15bfecd1f575ee18d4dd5d1cddcc3e02}{AUTH\_SUCCESS}},\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{database_8h_ad363601954b054a73b2db68dd2f96920ac599c6bac41d011c1a8e5bad4fecbdee}{AUTH\_USER\_NOT\_FOUND}},\ \ \ \ }
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{database_8h_ad363601954b054a73b2db68dd2f96920aad6a08fd44676fdf1ab8821780845411}{AUTH\_WRONG\_PASSWORD}},\ \ \ \ }
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{database_8h_ad363601954b054a73b2db68dd2f96920a2ac40b2966a784c9c97e077229dbc817}{AUTH\_USER\_BLOCKED}}\ \ \ \ \ \ \ }
+\DoxyCodeLine{00049\ \}\ \mbox{\hyperlink{database_8h_ad363601954b054a73b2db68dd2f96920}{auth\_result\_t}};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00063\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{database_8h_a1e8df27be8b0a376b797728005ed8e67}{database\_init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00079\ \mbox{\hyperlink{database_8h_ad363601954b054a73b2db68dd2f96920}{auth\_result\_t}}\ \mbox{\hyperlink{database_8h_a3b23caca6cde6975952ea073ab8c3770}{authenticate\_user}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{keywordtype}{id},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ password);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00095\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{database_8h_a2e6b3b46dde1a2ccd6d7d941f6217809}{change\_user\_password}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{keywordtype}{id},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ old\_password,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ new\_password);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00105\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{database_8h_ae1225e20b3e83859aee09e0fb88e6649}{print\_database\_status}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DATABASE\_H}}
+
+\end{DoxyCode}

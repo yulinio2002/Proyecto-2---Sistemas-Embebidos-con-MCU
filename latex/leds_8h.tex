@@ -1,0 +1,180 @@
+\doxysection{leds.\+h File Reference}
+\hypertarget{leds_8h}{}\label{leds_8h}\index{leds.h@{leds.h}}
+
+
+Módulo de control de señales luminosas para sistema de acceso con Free\+RTOS.  
+
+
+{\ttfamily \#include "{}pico/stdlib.\+h"{}}\newline
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}queue.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structled__cmd__t}{led\+\_\+cmd\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Estructura para comandos de LED. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{leds_8h_af60f58e726a04e968f18d6d333175a85}\label{leds_8h_af60f58e726a04e968f18d6d333175a85} 
+\#define {\bfseries LED\+\_\+\+VERDE\+\_\+\+PIN}~15
+\begin{DoxyCompactList}\small\item\em Pin GPIO para LED verde -\/ indica acceso concedido. \end{DoxyCompactList}\item 
+\Hypertarget{leds_8h_a110e71a6f4ae538852777561a06d4958}\label{leds_8h_a110e71a6f4ae538852777561a06d4958} 
+\#define {\bfseries LED\+\_\+\+ROJO\+\_\+\+PIN}~16
+\begin{DoxyCompactList}\small\item\em Pin GPIO para LED rojo -\/ indica acceso denegado. \end{DoxyCompactList}\item 
+\Hypertarget{leds_8h_a6ca2d0c290218a73ccc2ce09ed699d13}\label{leds_8h_a6ca2d0c290218a73ccc2ce09ed699d13} 
+\#define {\bfseries LED\+\_\+\+AMARILLO\+\_\+\+PIN}~17
+\begin{DoxyCompactList}\small\item\em Pin GPIO para LED amarillo -\/ estado del sistema. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{leds_8h_a25dc233a9dc8904b8ce586b61edc282d}{led\+\_\+state\+\_\+t}} \{ \mbox{\hyperlink{leds_8h_a25dc233a9dc8904b8ce586b61edc282dafc0ca8cc6cbe215fd3f1ae6d40255b40}{LED\+\_\+\+OFF}}
+, \mbox{\hyperlink{leds_8h_a25dc233a9dc8904b8ce586b61edc282dadd01b80eb93658fb4cf7eb9aceb89a1d}{LED\+\_\+\+ON}}
+, \mbox{\hyperlink{leds_8h_a25dc233a9dc8904b8ce586b61edc282da1577011fa256979ac1ad588c8d17d917}{LED\+\_\+\+BLINK}}
+ \}
+\begin{DoxyCompactList}\small\item\em Estados posibles de los LEDs. \end{DoxyCompactList}\item 
+\Hypertarget{leds_8h_a79233b941dd6a914489a3a6a6a6268a3}\label{leds_8h_a79233b941dd6a914489a3a6a6a6268a3} 
+enum \mbox{\hyperlink{leds_8h_a79233b941dd6a914489a3a6a6a6268a3}{led\+\_\+command\+\_\+t}} \{ \newline
+{\bfseries LED\+\_\+\+CMD\+\_\+\+VERDE\+\_\+\+ON}
+, {\bfseries LED\+\_\+\+CMD\+\_\+\+VERDE\+\_\+\+OFF}
+, {\bfseries LED\+\_\+\+CMD\+\_\+\+ROJO\+\_\+\+ON}
+, {\bfseries LED\+\_\+\+CMD\+\_\+\+ROJO\+\_\+\+OFF}
+, \newline
+{\bfseries LED\+\_\+\+CMD\+\_\+\+AMARILLO\+\_\+\+ON}
+, {\bfseries LED\+\_\+\+CMD\+\_\+\+AMARILLO\+\_\+\+OFF}
+, {\bfseries LED\+\_\+\+CMD\+\_\+\+AMARILLO\+\_\+\+BLINK}
+, {\bfseries LED\+\_\+\+CMD\+\_\+\+ALL\+\_\+\+OFF}
+, \newline
+{\bfseries LED\+\_\+\+CMD\+\_\+\+ACCESO\+\_\+\+CONCEDIDO}
+, {\bfseries LED\+\_\+\+CMD\+\_\+\+ACCESO\+\_\+\+DENEGADO}
+, {\bfseries LED\+\_\+\+CMD\+\_\+\+SISTEMA\+\_\+\+LISTO}
+, {\bfseries LED\+\_\+\+CMD\+\_\+\+PROCESO\+\_\+\+INICIADO}
+, \newline
+{\bfseries LED\+\_\+\+CMD\+\_\+\+ESPERANDO\+\_\+\+CLAVE}
+ \}
+\begin{DoxyCompactList}\small\item\em Comandos para la tarea de LEDs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{leds_8h_a1b31debce7b7f891f7807b4670f956cb}{leds\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Inicializa todos los LEDs del sistema. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{leds_8h_a36378e192e5451f98c1e78d80d198589}{led\+\_\+task}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\begin{DoxyCompactList}\small\item\em Tarea de Free\+RTOS para manejar los LEDs. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{leds_8h_a95fa648acf78a6a22712c2ed1295dd5b}{led\+\_\+send\+\_\+command}} (\mbox{\hyperlink{leds_8h_a79233b941dd6a914489a3a6a6a6268a3}{led\+\_\+command\+\_\+t}} command, uint32\+\_\+t duration\+\_\+ms)
+\begin{DoxyCompactList}\small\item\em Envía un comando a la tarea de LEDs. \end{DoxyCompactList}\item 
+\Hypertarget{leds_8h_a05162655108b613ed98808cab6f5c025}\label{leds_8h_a05162655108b613ed98808cab6f5c025} 
+void {\bfseries signal\+\_\+acceso\+\_\+concedido} (void)
+\begin{DoxyCompactList}\small\item\em Señaliza acceso concedido con LED verde durante 5 segundos. \end{DoxyCompactList}\item 
+\Hypertarget{leds_8h_aa0d65026017d711f609077e1022f900a}\label{leds_8h_aa0d65026017d711f609077e1022f900a} 
+void {\bfseries signal\+\_\+acceso\+\_\+denegado} (void)
+\begin{DoxyCompactList}\small\item\em Señaliza acceso denegado con LED rojo durante 2 segundos. \end{DoxyCompactList}\item 
+\Hypertarget{leds_8h_af5326903eca8dd0c90ef19bc6c0d7200}\label{leds_8h_af5326903eca8dd0c90ef19bc6c0d7200} 
+void {\bfseries signal\+\_\+sistema\+\_\+listo} (void)
+\begin{DoxyCompactList}\small\item\em Señaliza que el sistema está listo con LED amarillo permanente. \end{DoxyCompactList}\item 
+\Hypertarget{leds_8h_af034deb6e1f0b01ec055dd10616534f9}\label{leds_8h_af034deb6e1f0b01ec055dd10616534f9} 
+void {\bfseries signal\+\_\+proceso\+\_\+iniciado} (void)
+\begin{DoxyCompactList}\small\item\em Señaliza que el proceso de autenticación ha iniciado. \end{DoxyCompactList}\item 
+\Hypertarget{leds_8h_a1a9e4819ee66b36ca169e97f96dc68e6}\label{leds_8h_a1a9e4819ee66b36ca169e97f96dc68e6} 
+void {\bfseries signal\+\_\+esperando\+\_\+clave} (void)
+\begin{DoxyCompactList}\small\item\em Señaliza espera de contraseña con LED amarillo parpadeando. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Módulo de control de señales luminosas para sistema de acceso con Free\+RTOS. 
+
+\begin{DoxyAuthor}{Author}
+Sistema de Control de Acceso 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2025
+\end{DoxyDate}
+Este módulo maneja las señales luminosas del sistema de control de acceso utilizando Free\+RTOS, incluyendo LEDs de estado y señalización de eventos. 
+
+\label{doc-enum-members}
+\Hypertarget{leds_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{leds_8h_a25dc233a9dc8904b8ce586b61edc282d}\index{leds.h@{leds.h}!led\_state\_t@{led\_state\_t}}
+\index{led\_state\_t@{led\_state\_t}!leds.h@{leds.h}}
+\doxysubsubsection{\texorpdfstring{led\_state\_t}{led\_state\_t}}
+{\footnotesize\ttfamily \label{leds_8h_a25dc233a9dc8904b8ce586b61edc282d} 
+enum \mbox{\hyperlink{leds_8h_a25dc233a9dc8904b8ce586b61edc282d}{led\+\_\+state\+\_\+t}}}
+
+
+
+Estados posibles de los LEDs. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LED\_OFF@{LED\_OFF}!leds.h@{leds.h}}\index{leds.h@{leds.h}!LED\_OFF@{LED\_OFF}}}\Hypertarget{leds_8h_a25dc233a9dc8904b8ce586b61edc282dafc0ca8cc6cbe215fd3f1ae6d40255b40}\label{leds_8h_a25dc233a9dc8904b8ce586b61edc282dafc0ca8cc6cbe215fd3f1ae6d40255b40} 
+LED\+\_\+\+OFF&LED apagado \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LED\_ON@{LED\_ON}!leds.h@{leds.h}}\index{leds.h@{leds.h}!LED\_ON@{LED\_ON}}}\Hypertarget{leds_8h_a25dc233a9dc8904b8ce586b61edc282dadd01b80eb93658fb4cf7eb9aceb89a1d}\label{leds_8h_a25dc233a9dc8904b8ce586b61edc282dadd01b80eb93658fb4cf7eb9aceb89a1d} 
+LED\+\_\+\+ON&LED encendido permanente \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LED\_BLINK@{LED\_BLINK}!leds.h@{leds.h}}\index{leds.h@{leds.h}!LED\_BLINK@{LED\_BLINK}}}\Hypertarget{leds_8h_a25dc233a9dc8904b8ce586b61edc282da1577011fa256979ac1ad588c8d17d917}\label{leds_8h_a25dc233a9dc8904b8ce586b61edc282da1577011fa256979ac1ad588c8d17d917} 
+LED\+\_\+\+BLINK&LED parpadeando \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{leds_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{leds_8h_a95fa648acf78a6a22712c2ed1295dd5b}\index{leds.h@{leds.h}!led\_send\_command@{led\_send\_command}}
+\index{led\_send\_command@{led\_send\_command}!leds.h@{leds.h}}
+\doxysubsubsection{\texorpdfstring{led\_send\_command()}{led\_send\_command()}}
+{\footnotesize\ttfamily \label{leds_8h_a95fa648acf78a6a22712c2ed1295dd5b} 
+bool led\+\_\+send\+\_\+command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{leds_8h_a79233b941dd6a914489a3a6a6a6268a3}{led\+\_\+command\+\_\+t}}}]{command}{, }\item[{uint32\+\_\+t}]{duration\+\_\+ms}{}\end{DoxyParamCaption})}
+
+
+
+Envía un comando a la tarea de LEDs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & Comando a ejecutar \\
+\hline
+{\em duration\+\_\+ms} & Duración del comando (0 = permanente) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true Si el comando se envió exitosamente 
+
+false Si hubo error al enviar el comando 
+\end{DoxyReturn}
+\Hypertarget{leds_8h_a36378e192e5451f98c1e78d80d198589}\index{leds.h@{leds.h}!led\_task@{led\_task}}
+\index{led\_task@{led\_task}!leds.h@{leds.h}}
+\doxysubsubsection{\texorpdfstring{led\_task()}{led\_task()}}
+{\footnotesize\ttfamily \label{leds_8h_a36378e192e5451f98c1e78d80d198589} 
+void led\+\_\+task (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+
+
+Tarea de Free\+RTOS para manejar los LEDs. 
+
+Esta tarea procesa comandos de LED desde una cola y maneja los patrones de parpadeo automáticamente.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pv\+Parameters} & Parámetros de la tarea (no utilizados) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{leds_8h_a1b31debce7b7f891f7807b4670f956cb}\index{leds.h@{leds.h}!leds\_init@{leds\_init}}
+\index{leds\_init@{leds\_init}!leds.h@{leds.h}}
+\doxysubsubsection{\texorpdfstring{leds\_init()}{leds\_init()}}
+{\footnotesize\ttfamily \label{leds_8h_a1b31debce7b7f891f7807b4670f956cb} 
+bool leds\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inicializa todos los LEDs del sistema. 
+
+Configura los pines GPIO como salidas y los inicializa en estado apagado. Crea la cola para comandos de LEDs.
+
+\begin{DoxyReturn}{Returns}
+true Si la inicialización fue exitosa 
+
+false Si hubo error en la inicialización 
+\end{DoxyReturn}
